@@ -99,8 +99,30 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Antlr3.Runtime.dll" />
+    <Content Include="bin\Antlr3.Runtime.pdb" />
+    <Content Include="bin\es\Microsoft.AspNet.FriendlyUrls.resources.dll" />
+    <Content Include="bin\es\System.Web.Optimization.resources.dll" />
+    <Content Include="bin\Microsoft.AspNet.FriendlyUrls.dll" />
+    <Content Include="bin\Microsoft.AspNet.FriendlyUrls.xml" />
+    <Content Include="bin\Microsoft.AspNet.Web.Optimization.WebForms.dll" />
+    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
+    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
+    <Content Include="bin\Microsoft.ScriptManager.MSAjax.dll" />
+    <Content Include="bin\Microsoft.ScriptManager.WebForms.dll" />
+    <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
+    <Content Include="bin\Newtonsoft.Json.dll" />
+    <Content Include="bin\Newtonsoft.Json.xml" />
+    <Content Include="bin\System.Web.Optimization.dll" />
+    <Content Include="bin\System.Web.Optimization.xml" />
+    <Content Include="bin\TPC-Resto.dll" />
+    <Content Include="bin\TPC-Resto.pdb" />
+    <Content Include="bin\WebGrease.dll" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="obj\Debug\TPC-Resto.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\TPC-Resto.dll" />
+    <Content Include="obj\Debug\TPC-Resto.pdb" />
     <Content Include="Site.Master" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
@@ -118,6 +140,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="obj\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
@@ -144,9 +167,15 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\" />
+    <Folder Include="obj\Debug\TempPE\" />
     <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\TPC-Resto.dll.config" />
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="obj\Debug\TPC-Resto.csproj.AssemblyReference.cache" />
+    <Content Include="obj\Debug\TPC-Resto.csproj.CoreCompileInputs.cache" />
+    <Content Include="obj\Debug\TPC-Resto.csproj.Up2Date" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
