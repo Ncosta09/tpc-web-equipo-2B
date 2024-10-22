@@ -7,9 +7,12 @@ namespace Dominio
 {
     public class Usuario
     {
-        public int id { get; set; }
-        public string name { get; set; }
-        public string contrasenia { get; set; }
-        public string rol { get; set; }
+        public int ID { get; set; }
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public string Dni { get; set; }
+        public string Email { get; set; }
+        public string Contrasenia { get; set; }
+        public Rol Rol { get; set; }
     }
 }

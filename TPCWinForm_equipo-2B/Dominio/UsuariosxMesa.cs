@@ -5,10 +5,11 @@ using System.Web;
 
 namespace Dominio
 {
-    public class Mesero
+    public class UsuariosxMesa
     {
         public int ID { get; set; }
-        public string nombre { get; set; }
-        List<Mesa> mesasAsignadas { get; set; }
+        public Usuario Usuario { get; set; }
+        public Mesa Mesa { get; set; }
+
     }
 }

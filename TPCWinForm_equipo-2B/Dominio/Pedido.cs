@@ -8,8 +8,11 @@ namespace Dominio
     public class Pedido
     {
         public int ID { get; set; }
-        public DateTime fechaApertura { get; set; }
-        public DateTime fechaCierre { get; set; }
-        public List<DetallePedido> detallePedido { get; set; }
+        public int Estado { get; set; }
+        public DateTime FechaInicio { get; set; }
+        public DateTime FechaCierre { get; set; }
+        public Mesa Mesa { get; set; }
+        public Usuario Usuario { get; set; }
+
     }
 }

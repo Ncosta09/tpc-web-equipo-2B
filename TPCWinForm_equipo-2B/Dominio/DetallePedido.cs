@@ -7,9 +7,9 @@ namespace Dominio
 {
     public class DetallePedido
     {
-        public int Id { get; set; }
-        public Insumo insumo { get; set; }
-        public int cantidad { get; set; }
-        public decimal precioTotal { get; set; }
+        public int ID { get; set; }
+        public int Cantidad { get; set; }
+        public Pedido Pedido { get; set; }
+        public Insumo Insumo { get; set; }
     }
 }

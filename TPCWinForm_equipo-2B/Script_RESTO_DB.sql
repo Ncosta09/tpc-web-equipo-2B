@@ -26,20 +26,20 @@ CREATE TABLE Usuarios (
 );
 GO
 
--- Crear tabla UsuariosxMesa
+-- Crear tabla Mesas
+CREATE TABLE Mesas (
+    IdMesa SMALLINT PRIMARY KEY IDENTITY(1,1),
+    NumeroMesa INT NOT NULL
+);
+GO
+
+-- Crear tabla UsuariosxMesa (tabla intermedia)
 CREATE TABLE UsuariosxMesa (
     ID INT PRIMARY KEY IDENTITY(1,1),
     IdUsuario INT NOT NULL,
     IdMesa SMALLINT NOT NULL,
-    FOREIGN KEY (IdUsuario) REFERENCES Usuarios(IdUsuario)
-);
-GO
-
--- Crear tabla Mesas
-CREATE TABLE Mesas (
-    IdMesa SMALLINT PRIMARY KEY IDENTITY(1,1),
-    IDUsuariosxMesa INT,
-    FOREIGN KEY (IDUsuariosxMesa) REFERENCES UsuariosxMesa(ID)
+    FOREIGN KEY (IdUsuario) REFERENCES Usuarios(IdUsuario),
+    FOREIGN KEY (IdMesa) REFERENCES Mesas(IdMesa)
 );
 GO
 
@@ -48,8 +48,9 @@ CREATE TABLE Pedidos (
     IDPedido INT PRIMARY KEY IDENTITY(1,1),
     IdMesa SMALLINT NOT NULL,
     IdUsuario INT NOT NULL,
-    Estado TINYINT NOT NULL, -- Usar un tipo de dato pequeño para estados
-    Fecha DATETIME NOT NULL, -- Sin valor predeterminado
+    Estado TINYINT NOT NULL, 
+    FechaInicio DATETIME NOT NULL,
+    FechaCierre DATETIME NULL,
     FOREIGN KEY (IdMesa) REFERENCES Mesas(IdMesa),
     FOREIGN KEY (IdUsuario) REFERENCES Usuarios(IdUsuario)
 );
