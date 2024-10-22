@@ -6,11 +6,37 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - Resto Experience</title>
+
+     <%--CSS--%>
+    <link href="Content/Styles/General.css" rel="stylesheet" />
+    <link href="Content/Styles/Header.css" rel="stylesheet" />
+    <link href="Content/Styles/Footer.css" rel="stylesheet" />
+    <link href="Content/Styles/LogIn.css" rel="stylesheet" />
+
+    <title>Resto</title>
 </head>
 <body>
     <form runat="server">
-        <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
+
+        <nav>
+            <div>
+                <h1>Admin Resto</h1>
+            </div>
+            <ul>
+                <li><a runat="server" href="~/Registro">Registrate</a></li> <%--NO tiene ruta todavia--%>
+            </ul>
+        </nav>
+
+
+        <div class="main-master-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
+        </div>
+
+        <footer class="background">
+            <div>
+                <p class="footer-text">Grupo 2B - Turno Noche</p>
+            </div>
+        </footer>
     </form>
 </body>
 </html>

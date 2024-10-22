@@ -1,0 +1,17 @@
+﻿* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+nav{
+    height: 5vh;
+}
+
+.main-master-content{
+    height: 87vh;
+}
+
+footer {
+    height: 8vh;
+}

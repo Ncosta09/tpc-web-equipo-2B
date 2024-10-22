@@ -1,0 +1,12 @@
+﻿.footer-text
+{
+    color: white;
+}
+
+.background {
+    background-color: #333;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
