@@ -5,29 +5,31 @@
 <main class="main-container">
     <div class="form-container">
         <h2 class="form-title">Registro</h2>
-        <form class="form" action="tu_ruta_de_registro" method="POST">
+        <div class="form">
             <div class="form-group">
-                <label class="form-label" for="nombre">Nombre:</label>
-                <input class="form-input" type="text" id="nombre" name="nombre" required>
+                <label class="form-label" for="txtNombre">Nombre:</label>
+                 <asp:TextBox ID="txtNombre" runat="server" placeholder="Nombre" CssClass="form-input" />
             </div>
             <div class="form-group">
-                <label class="form-label" for="apellido">Apellido:</label>
-                <input class="form-input" type="text" id="apellido" name="apellido" required>
+                <label class="form-label" for="txtApellido">Apellido:</label>
+                <asp:TextBox ID="txtApellido" runat="server" placeholder="Apellido" CssClass="form-input" />
             </div>
             <div class="form-group">
-                <label class="form-label" for="dni">DNI:</label>
-                <input class="form-input" type="text" id="dni" name="dni" required>
+                <label class="form-label" for="txtDni">DNI:</label>
+                <asp:TextBox ID="txtDni" runat="server" placeholder="Documento" CssClass="form-input" />
             </div>
             <div class="form-group">
-                <label class="form-label" for="email">Email:</label>
-                <input class="form-input" type="email" id="email" name="email" required>
+                <label class="form-label" for="txtEmail">Email:</label>
+                <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" placeholder="Email" CssClass="form-input" />
             </div>
             <div class="form-group">
-                <label class="form-label" for="password">Contraseña:</label>
-                <input class="form-input" type="password" id="password" name="password" required>
+                <label class="form-label" for="txtContrasenia">Contraseña:</label>
+                <asp:TextBox ID="txtContrasenia" runat="server" TextMode="Password" placeholder="Contraseña" CssClass="form-input" />
             </div>
-            <button class="form-button" type="submit">Registrarse</button>
-        </form>
+
+            <asp:Button ID="btnRegistro" runat="server" Text="Registrate" CssClass="form-button" /> <%--OnClick=""  FALTA AGREGAR--%>
+
+        </div>
     </div>
 </main>
 

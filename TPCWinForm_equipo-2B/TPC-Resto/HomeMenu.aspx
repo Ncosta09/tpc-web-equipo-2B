@@ -8,7 +8,7 @@
             <a runat="server" class="button administracion" href="~/Administracion.aspx">Administracion</a>
         </div>
         <div class="right-side">
-            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-8FxEChlQEA05xuMTZZvJ7SlHbK5hOi.png" alt="Escena de restaurante">
+            <img src="https://img.freepik.com/foto-gratis/camarero-feliz-sirviendo-comida-grupo-amigos-alegres-pub_637285-12525.jpg" alt="Escena mesero">
         </div>
     </main>
 
