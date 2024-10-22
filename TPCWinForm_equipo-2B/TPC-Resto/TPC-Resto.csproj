@@ -99,6 +99,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Administracion.aspx" />
     <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\Antlr3.Runtime.pdb" />
     <Content Include="bin\Dominio.dll" />
@@ -126,10 +127,12 @@
     <Content Include="Content\Styles\General.css" />
     <Content Include="Content\Styles\Header.css" />
     <Content Include="Content\Styles\LogIn.css" />
+    <Content Include="Content\Styles\MainMenu.css" />
     <Content Include="Content\Styles\Registro.css" />
     <Content Include="Content\Styles\salon.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="HomeMenu.aspx" />
     <Content Include="obj\Debug\TPC-Resto.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\TPC-Resto.dll" />
     <Content Include="obj\Debug\TPC-Resto.pdb" />
@@ -141,6 +144,13 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Administracion.aspx.cs">
+      <DependentUpon>Administracion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administracion.aspx.designer.cs">
+      <DependentUpon>Administracion.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -151,6 +161,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="HomeMenu.aspx.cs">
+      <DependentUpon>HomeMenu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HomeMenu.aspx.designer.cs">
+      <DependentUpon>HomeMenu.aspx</DependentUpon>
     </Compile>
     <Compile Include="obj\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

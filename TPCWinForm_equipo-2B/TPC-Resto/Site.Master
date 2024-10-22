@@ -13,6 +13,7 @@
     <link href="Content/Styles/Footer.css" rel="stylesheet" />
     <link href="Content/Styles/LogIn.css" rel="stylesheet" />
     <link href="Content/Styles/Registro.css" rel="stylesheet" />
+    <link href="Content/Styles/MainMenu.css" rel="stylesheet" />
 
     <title>Resto</title>
 </head>
