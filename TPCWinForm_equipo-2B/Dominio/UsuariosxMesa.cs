@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Dominio
 {
@@ -10,6 +11,5 @@ namespace Dominio
         public int ID { get; set; }
         public Usuario Usuario { get; set; }
         public Mesa Mesa { get; set; }
-
     }
 }

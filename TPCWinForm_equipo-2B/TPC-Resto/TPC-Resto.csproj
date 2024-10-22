@@ -118,6 +118,7 @@
     <Content Include="bin\TPC-Resto.dll" />
     <Content Include="bin\TPC-Resto.pdb" />
     <Content Include="bin\WebGrease.dll" />
+    <Content Include="Content\Styles\LogIn.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="obj\Debug\TPC-Resto.csproj.FileListAbsolute.txt" />
@@ -166,7 +167,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\" />
     <Folder Include="obj\Debug\TempPE\" />
     <Folder Include="Scripts\" />
   </ItemGroup>
@@ -183,16 +183,6 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Dominio\Dominio.csproj">
-      <Project>{3747773d-bccb-4e07-89a5-588f575eb2ab}</Project>
-      <Name>Dominio</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Negocio\Negocio.csproj">
-      <Project>{0f9e7694-d1fc-4fd3-99c9-56f6a2f78c2b}</Project>
-      <Name>Negocio</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

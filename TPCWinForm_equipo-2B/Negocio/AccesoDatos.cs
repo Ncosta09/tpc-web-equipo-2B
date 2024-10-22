@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace Negocio
 {
@@ -66,8 +67,7 @@ namespace Negocio
 
         public void cerrarConexion()
         {
-            if (lector != null)
-            {
+            if (lector != null){
                 lector.Close();
                 conexion.Close();
             }
@@ -79,6 +79,8 @@ namespace Negocio
             try
             {
                 conexion.Open();
+                //devuelve el valor de la primera columna de la primera fila
+                //necesario para FIX registro nuevo que no matchea forenkey
                 return comando.ExecuteScalar();
             }
             catch (Exception ex)
