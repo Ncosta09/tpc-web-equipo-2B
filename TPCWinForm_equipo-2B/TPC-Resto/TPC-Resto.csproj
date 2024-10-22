@@ -101,6 +101,8 @@
   <ItemGroup>
     <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\Antlr3.Runtime.pdb" />
+    <Content Include="bin\Dominio.dll" />
+    <Content Include="bin\Dominio.pdb" />
     <Content Include="bin\es\Microsoft.AspNet.FriendlyUrls.resources.dll" />
     <Content Include="bin\es\System.Web.Optimization.resources.dll" />
     <Content Include="bin\Microsoft.AspNet.FriendlyUrls.dll" />
@@ -111,6 +113,8 @@
     <Content Include="bin\Microsoft.ScriptManager.MSAjax.dll" />
     <Content Include="bin\Microsoft.ScriptManager.WebForms.dll" />
     <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
+    <Content Include="bin\Negocio.dll" />
+    <Content Include="bin\Negocio.pdb" />
     <Content Include="bin\Newtonsoft.Json.dll" />
     <Content Include="bin\Newtonsoft.Json.xml" />
     <Content Include="bin\System.Web.Optimization.dll" />
@@ -122,12 +126,14 @@
     <Content Include="Content\Styles\General.css" />
     <Content Include="Content\Styles\Header.css" />
     <Content Include="Content\Styles\LogIn.css" />
+    <Content Include="Content\Styles\Registro.css" />
     <Content Include="Content\Styles\salon.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="obj\Debug\TPC-Resto.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\TPC-Resto.dll" />
     <Content Include="obj\Debug\TPC-Resto.pdb" />
+    <Content Include="Registro.aspx" />
     <Content Include="Salon.aspx" />
     <Content Include="Site.Master" />
     <Content Include="ViewSwitcher.ascx" />
@@ -148,6 +154,13 @@
     </Compile>
     <Compile Include="obj\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registro.aspx.cs">
+      <DependentUpon>Registro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Registro.aspx.designer.cs">
+      <DependentUpon>Registro.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Salon.aspx.cs">
       <DependentUpon>Salon.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

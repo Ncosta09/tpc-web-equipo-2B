@@ -12,6 +12,7 @@
     <link href="Content/Styles/Header.css" rel="stylesheet" />
     <link href="Content/Styles/Footer.css" rel="stylesheet" />
     <link href="Content/Styles/LogIn.css" rel="stylesheet" />
+    <link href="Content/Styles/Registro.css" rel="stylesheet" />
 
     <title>Resto</title>
 </head>
@@ -23,10 +24,9 @@
                 <h1>Admin Resto</h1>
             </div>
             <ul>
-                <li><a runat="server" href="~/Registro">Registrate</a></li> <%--NO tiene ruta todavia--%>
+                <li><a runat="server" href="~/Registro.aspx">Registrate</a></li>
             </ul>
         </nav>
-
 
         <div class="main-master-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
