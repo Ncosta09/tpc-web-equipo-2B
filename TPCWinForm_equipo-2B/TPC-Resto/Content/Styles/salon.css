@@ -1,0 +1,79 @@
+﻿
+.section1 {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    gap: 10px;
+}
+
+.col-izq {
+    background-color: #b4b4b4;
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 60px;
+    align-items: center;
+    justify-content: center;
+}
+
+.col-der {
+    background-color: #b4b4b4;
+    width: 50%;
+}
+
+.card {
+    border: 2px solid #000;
+    border-radius: 0.35rem;
+    width: 93%;
+    margin: 20px auto;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    padding: 10px;
+}
+
+.mesa {
+    background-color: green;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+}
+
+.botons {
+    display: flex;
+    justify-content: flex-start; 
+    gap: 10px;
+    margin-top: auto;
+}
+
+.row{
+    display: flex;
+    justify-content: start;
+    gap: 20px;
+}
+
+.grid {
+    border: 1px solid #000;
+    overflow-y: auto;
+    margin: 10px 0;
+}
+
+#gridInsumos {
+    width: 100%;
+    border: 1px solid #000;
+    border-collapse: collapse;
+  
+}
+
+#gridInsumos th, #gridInsumos td {
+    border: 1px solid #000;
+    padding: 8px;
+    text-align: left;
+}
+
+.row-btn{
+    display: flex;
+    justify-content: space-between;
+}
