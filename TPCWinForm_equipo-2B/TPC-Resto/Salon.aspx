@@ -5,18 +5,16 @@
 
             <div class = "col-izq"> <% //salon con mesas %>
                     <div class="container-mesas">   
-                <asp:Panel class="mesa" runat="server"> </asp:Panel>
-                <asp:Panel class="mesa" runat="server"> </asp:Panel>
-                <asp:Panel class="mesa" runat="server"> </asp:Panel>
-                <asp:Panel class="mesa" runat="server"> </asp:Panel>
-                <asp:Panel class="mesa" runat="server"> </asp:Panel>
-                <asp:Panel class="mesa" runat="server"> </asp:Panel>
-                <asp:Panel class="mesa" runat="server"> </asp:Panel>
-                <asp:Panel class="mesa" runat="server"> </asp:Panel>
-                <asp:Panel class="mesa" runat="server"> </asp:Panel>
-                <asp:Panel class="mesa" runat="server"> </asp:Panel>
-                <asp:Panel class="mesa" runat="server"> </asp:Panel>
-                <asp:Panel class="mesa" runat="server"> </asp:Panel>
+
+                 <asp:Repeater ID="RepeaterMesas" runat="server">
+                    <ItemTemplate>
+                        <div>
+                            <asp:Button class="mesa" runat="server" Text='<%# Eval("NumeroMesa") %>' />
+                            <%--<%# Eval("NumeroMesa") %>  NUMERO A LA DERECHA DE LA MESA--%>
+                        </div>
+                    </ItemTemplate>
+                </asp:Repeater>
+
                 </div>
             </div>
             <div class = "col-der"> <% //cards mesero x mesa %>

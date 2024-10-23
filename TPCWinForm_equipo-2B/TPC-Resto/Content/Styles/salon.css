@@ -16,7 +16,7 @@
 
 .container-mesas {
     height: 100%;
-    max-width: 80%;
+    max-width: 90%;
     display: flex;
     flex-wrap: wrap;
     gap: 60px;

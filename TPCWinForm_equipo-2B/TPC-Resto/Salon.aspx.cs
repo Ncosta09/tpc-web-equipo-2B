@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Negocio;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -14,28 +15,35 @@ namespace TPC_Resto
         {
             if (!IsPostBack)
             {
-
-                DataTable dt = new DataTable();
-                dt.Columns.AddRange(new DataColumn[3]
-                {
-                    new DataColumn("Insumo", typeof(string)),
-                    new DataColumn("Cantidad", typeof(int)),
-                    new DataColumn("Precio", typeof(decimal))
-                });
-
-                //datos forzados para mostrar el grid
-                dt.Rows.Add("Insumo 1", 10, 100m);
-                dt.Rows.Add("Insumo 2", 15, 450m);
-                dt.Rows.Add("Insumo 3", 20, 340m);
-                dt.Rows.Add("Insumo 4", 25, 520.25m);
-                dt.Rows.Add("Insumo 5", 30, 213.44m);
-                dt.Rows.Add("Insumo 6", 10, 100m);
-                dt.Rows.Add("Insumo 7", 15, 450m);
-                dt.Rows.Add("Insumo 8", 20, 340m);
-
-                gridInsumos.DataSource = dt;
-                gridInsumos.DataBind();
+                MesasSalon mesasSalon = new MesasSalon();
+                RepeaterMesas.DataSource = mesasSalon.listarMesa();
+                RepeaterMesas.DataBind();
             }
+
+            //if (!IsPostBack)
+            //{
+
+            //    DataTable dt = new DataTable();
+            //    dt.Columns.AddRange(new DataColumn[3]
+            //    {
+            //        new DataColumn("Insumo", typeof(string)),
+            //        new DataColumn("Cantidad", typeof(int)),
+            //        new DataColumn("Precio", typeof(decimal))
+            //    });
+
+            //    //datos forzados para mostrar el grid
+            //    dt.Rows.Add("Insumo 1", 10, 100m);
+            //    dt.Rows.Add("Insumo 2", 15, 450m);
+            //    dt.Rows.Add("Insumo 3", 20, 340m);
+            //    dt.Rows.Add("Insumo 4", 25, 520.25m);
+            //    dt.Rows.Add("Insumo 5", 30, 213.44m);
+            //    dt.Rows.Add("Insumo 6", 10, 100m);
+            //    dt.Rows.Add("Insumo 7", 15, 450m);
+            //    dt.Rows.Add("Insumo 8", 20, 340m);
+
+            //    gridInsumos.DataSource = dt;
+            //    gridInsumos.DataBind();
+            //}
         }
     }
 }
