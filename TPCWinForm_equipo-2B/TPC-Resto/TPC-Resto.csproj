@@ -144,6 +144,7 @@
     <Content Include="Web.config" />
     <Content Include="Site.Mobile.Master" />
     <Content Include="MenuPersonas.aspx" />
+    <Content Include="MenuStock.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Administracion.aspx.cs">
@@ -214,6 +215,13 @@
     </Compile>
     <Compile Include="MenuPersonas.aspx.designer.cs">
       <DependentUpon>MenuPersonas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MenuStock.aspx.cs">
+      <DependentUpon>MenuStock.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MenuStock.aspx.designer.cs">
+      <DependentUpon>MenuStock.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
