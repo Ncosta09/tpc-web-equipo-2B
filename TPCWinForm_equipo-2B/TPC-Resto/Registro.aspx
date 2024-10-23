@@ -22,12 +22,18 @@
                 <label class="form-label" for="txtEmail">Email:</label>
                 <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" placeholder="Email" CssClass="form-input" />
             </div>
+
             <div class="form-group">
                 <label class="form-label" for="txtContrasenia">Contraseña:</label>
                 <asp:TextBox ID="txtContrasenia" runat="server" TextMode="Password" placeholder="Contraseña" CssClass="form-input" />
             </div>
 
-            <asp:Button ID="btnRegistro" runat="server" Text="Registrate" CssClass="form-button" /> <%--OnClick=""  FALTA AGREGAR--%>
+            <div class="form-group">
+                <label class="form-label" for="txtRepetirContrasenia">Contraseña:</label>
+                <asp:TextBox ID="txtRepetirContrasenia" runat="server" TextMode="Password" placeholder="Contraseña" CssClass="form-input" />
+            </div>
+
+            <asp:Button ID="btnRegistro" runat="server" Text="Registrate" CssClass="form-button" OnClick="btnRegistro_Click" />
 
         </div>
     </div>

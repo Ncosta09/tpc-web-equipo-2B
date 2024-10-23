@@ -7,7 +7,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-     <%--CSS--%>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+     
+    <%--CSS--%>
     <link href="Content/Styles/General.css" rel="stylesheet" />
     <link href="Content/Styles/Header.css" rel="stylesheet" />
     <link href="Content/Styles/Footer.css" rel="stylesheet" />
@@ -15,8 +18,6 @@
     <link href="Content/Styles/Registro.css" rel="stylesheet" />
     <link href="Content/Styles/MainMenu.css" rel="stylesheet" />
 
-     <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
 
     <title>Resto</title>
 </head>
