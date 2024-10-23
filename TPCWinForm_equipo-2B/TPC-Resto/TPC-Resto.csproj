@@ -123,6 +123,7 @@
     <Content Include="bin\TPC-Resto.dll" />
     <Content Include="bin\TPC-Resto.pdb" />
     <Content Include="bin\WebGrease.dll" />
+    <Content Include="Content\Styles\Administracion.css" />
     <Content Include="Content\Styles\Footer.css" />
     <Content Include="Content\Styles\General.css" />
     <Content Include="Content\Styles\Header.css" />

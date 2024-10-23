@@ -1,0 +1,65 @@
+﻿html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.fullscreen-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: #f1f1f1;
+}
+
+.admin-card {
+    width: 100%;
+    max-width: 700px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.admin-card-header {
+    background-color: #343a40;
+    color: white;
+    padding: 20px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.admin-card-body {
+    padding: 40px;
+    text-align: center;
+}
+
+.admin-card-footer {
+    background-color: #f8f9fa;
+    padding: 15px;
+    text-align: center;
+    color: #6c757d;
+}
+
+.btn-admin {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+}
+
+.btn-admin-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-admin-info {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+.btn-admin-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
