@@ -1,7 +1,7 @@
 ﻿
 .section1 {
     display: flex;
-    height: 100vh;
+    height: 100%;
     width: 100%;
     gap: 10px;
 }
@@ -9,6 +9,14 @@
 .col-izq {
     background-color: #b4b4b4;
     width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-mesas {
+    height: 100%;
+    max-width: 80%;
     display: flex;
     flex-wrap: wrap;
     gap: 60px;
@@ -60,11 +68,14 @@
     margin: 10px 0;
 }
 
+.gridInsumos{
+    width: 100%;
+}
+
 #gridInsumos {
     width: 100%;
     border: 1px solid #000;
     border-collapse: collapse;
-  
 }
 
 #gridInsumos th, #gridInsumos td {

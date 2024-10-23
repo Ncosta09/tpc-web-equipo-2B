@@ -12,10 +12,9 @@ namespace TPC_Resto
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
             if (!IsPostBack)
             {
-                
+
                 DataTable dt = new DataTable();
                 dt.Columns.AddRange(new DataColumn[3]
                 {
@@ -30,8 +29,10 @@ namespace TPC_Resto
                 dt.Rows.Add("Insumo 3", 20, 340m);
                 dt.Rows.Add("Insumo 4", 25, 520.25m);
                 dt.Rows.Add("Insumo 5", 30, 213.44m);
+                dt.Rows.Add("Insumo 6", 10, 100m);
+                dt.Rows.Add("Insumo 7", 15, 450m);
+                dt.Rows.Add("Insumo 8", 20, 340m);
 
-                
                 gridInsumos.DataSource = dt;
                 gridInsumos.DataBind();
             }

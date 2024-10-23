@@ -1,19 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Salon.aspx.cs" Inherits="TPC_Resto.Salon" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Salon.aspx.cs" Inherits="TPC_Resto.Salon" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Salon</title>
-    <link href="Content/Styles/salon.css" rel="stylesheet" />
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div class = "section1">
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+            <div class = "section1">
 
             <div class = "col-izq"> <% //salon con mesas %>
-
+                    <div class="container-mesas">   
                 <asp:Panel class="mesa" runat="server"> </asp:Panel>
                 <asp:Panel class="mesa" runat="server"> </asp:Panel>
                 <asp:Panel class="mesa" runat="server"> </asp:Panel>
@@ -26,7 +17,7 @@
                 <asp:Panel class="mesa" runat="server"> </asp:Panel>
                 <asp:Panel class="mesa" runat="server"> </asp:Panel>
                 <asp:Panel class="mesa" runat="server"> </asp:Panel>
-
+                </div>
             </div>
             <div class = "col-der"> <% //cards mesero x mesa %>
                  <div class="card">
@@ -64,7 +55,4 @@
                  </div>
             </div>
         </div>
-
-    </form>
-</body>
-</html>
+</asp:Content>

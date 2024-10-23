@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <%--<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />--%>
      
     <%--CSS--%>
     <link href="Content/Styles/General.css" rel="stylesheet" />
@@ -17,7 +17,8 @@
     <link href="Content/Styles/LogIn.css" rel="stylesheet" />
     <link href="Content/Styles/Registro.css" rel="stylesheet" />
     <link href="Content/Styles/MainMenu.css" rel="stylesheet" />
-
+    <link href="Content/Styles/salon.css" rel="stylesheet" />
+    <link href="Content/Styles/Administracion.css" rel="stylesheet" />
 
     <title>Resto</title>
 </head>

@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="Administración" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeBehind="Administracion.aspx.cs" Inherits="TPC_Resto.Administracion" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <link href="Content/Styles/Administracion.css" rel="stylesheet" />
 
     <div class="fullscreen-container">
         <div class="admin-card">
