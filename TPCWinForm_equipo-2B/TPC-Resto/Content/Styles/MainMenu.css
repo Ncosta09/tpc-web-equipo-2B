@@ -1,6 +1,7 @@
-﻿.container {
+﻿.contenedor {
     display: flex;
     height: 100%;
+    width: 100%;
 }
 
 .left-side {
@@ -19,7 +20,7 @@
     overflow: hidden;
 }
 
-.button {
+.boton {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -37,8 +38,10 @@
     transition: all 0.3s ease;
 }
 
-.button:hover {
+.boton:hover {
     transform: scale(1.05);
+    text-decoration: none;
+    color: white;
 }
 
 .salon {

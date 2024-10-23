@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Bootstrap CSS -->
-    <%--<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />--%>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
      
     <%--CSS--%>
     <link href="Content/Styles/General.css" rel="stylesheet" />
@@ -30,6 +30,7 @@
                 <h1>Admin Resto</h1>
             </div>
             <ul>
+                <li><a runat="server" href="~/Default.aspx">LogIn</a></li>
                 <li><a runat="server" href="~/Registro.aspx">Registrate</a></li>
             </ul>
         </nav>

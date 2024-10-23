@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Dominio;
+using Negocio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,6 +13,30 @@ namespace TPC_Resto
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
+        }
+
+        protected void btnLogin_Click(object sender, EventArgs e)
+        {
+            Usuario usuario = new Usuario();
+            LogInUsuario negocio = new LogInUsuario();
+
+            try
+            {
+                usuario.Email = txtEmail.Text;
+                usuario.Contrasenia = txtContrasenia.Text;
+
+                if (negocio.loguearse(usuario))
+                {
+                    Session.Add("usuario", usuario);
+                    Response.Redirect("HomeMenu.aspx");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 
         }
     }

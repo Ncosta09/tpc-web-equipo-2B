@@ -15,7 +15,7 @@
                     <asp:TextBox ID="txtContrasenia" runat="server" TextMode="Password" placeholder="Contraseña" CssClass="form-input" />
                 </div>
 
-                <asp:Button ID="btnLogin" runat="server" Text="Ingresa" CssClass="login-button" /> <%--OnClick=""  FALTA AGREGAR--%>
+                <asp:Button ID="btnLogin" runat="server" Text="Ingresa" CssClass="login-button" OnClick="btnLogin_Click" />
 
             </div>
             <%--<p class="register-link">¿No tienes una cuenta? <a href="~/Registro">Registrate aquí</a></p>--%>
