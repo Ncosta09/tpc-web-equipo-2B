@@ -143,6 +143,7 @@
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Site.Mobile.Master" />
+    <Content Include="MenuPersonas.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Administracion.aspx.cs">
@@ -206,6 +207,13 @@
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="MenuPersonas.aspx.cs">
+      <DependentUpon>MenuPersonas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MenuPersonas.aspx.designer.cs">
+      <DependentUpon>MenuPersonas.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
