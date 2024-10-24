@@ -51,12 +51,12 @@
 
 .botons {
     display: flex;
-    justify-content: flex-start; 
+    justify-content: flex-start;
     gap: 10px;
     margin-top: auto;
 }
 
-.row{
+.row {
     display: flex;
     justify-content: start;
     gap: 20px;
@@ -68,7 +68,7 @@
     margin: 10px 0;
 }
 
-.gridInsumos{
+.gridInsumos {
     width: 100%;
 }
 
@@ -78,13 +78,63 @@
     border-collapse: collapse;
 }
 
-#gridInsumos th, #gridInsumos td {
-    border: 1px solid #000;
-    padding: 8px;
-    text-align: left;
-}
+    #gridInsumos th, #gridInsumos td {
+        border: 1px solid #000;
+        padding: 8px;
+        text-align: left;
+    }
 
-.row-btn{
+.row-btn {
     display: flex;
     justify-content: space-between;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fff;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+}
+
+/* Botón de cerrar */
+.close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    background: transparent;
+    border: none;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+.ddlistMeseros {
+    margin-bottom: 5px;
+}
+
+.mesa-ocupada {
+    background-color: red;
 }

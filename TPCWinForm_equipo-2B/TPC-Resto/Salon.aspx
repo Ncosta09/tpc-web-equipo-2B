@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Salon.aspx.cs" Inherits="TPC_Resto.Salon" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
             <div class = "section1">
 
             <div class = "col-izq"> <% //salon con mesas %>
@@ -9,7 +10,7 @@
                  <asp:Repeater ID="RepeaterMesas" runat="server">
                     <ItemTemplate>
                         <div>
-                            <asp:Button class="mesa" runat="server" Text='<%# Eval("NumeroMesa") %>' />
+                            <asp:Button class="mesa" runat="server" Text='<%# Eval("NumeroMesa") %>' OnClick="Mesa_Click" />
                             <%--<%# Eval("NumeroMesa") %>  NUMERO A LA DERECHA DE LA MESA--%>
                         </div>
                     </ItemTemplate>
@@ -53,4 +54,17 @@
                  </div>
             </div>
         </div>
+                <%-- Modal --%>
+            <div id="asignarMeseroModal" class="modal">
+              <div class="modal-content">
+                <asp:Button class="close" runat="server" Text=&times; />
+                <%--<span class="close"></span>--%>
+                <h3>Asignar Mesero</h3>
+                <asp:Label ID="lblNumeroMesa" runat="server" Text=""></asp:Label>
+
+                <asp:DropDownList cssClass="ddlistMeseros" ID="ddlMeseros" runat="server"></asp:DropDownList>
+
+                <asp:Button ID="btnAsignarMesero" runat="server" Text="Asignar Mesero" OnClick="btnAsignarMesero_Click"/>
+              </div>
+            </div>
 </asp:Content>

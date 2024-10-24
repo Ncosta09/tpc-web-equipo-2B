@@ -139,6 +139,7 @@
     <Content Include="obj\Debug\TPC-Resto.pdb" />
     <Content Include="Registro.aspx" />
     <Content Include="Salon.aspx" />
+    <Content Include="Script_JS\Modal.js" />
     <Content Include="Site.Master" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />

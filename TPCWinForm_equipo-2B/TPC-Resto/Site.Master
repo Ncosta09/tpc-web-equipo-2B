@@ -20,6 +20,9 @@
     <link href="Content/Styles/salon.css" rel="stylesheet" />
     <link href="Content/Styles/Administracion.css" rel="stylesheet" />
 
+     <%--SCRIPT JAVASCRIPT--%>
+    <script src="Script_JS/Modal.js"></script>
+
     <title>Resto</title>
 </head>
 <body>
