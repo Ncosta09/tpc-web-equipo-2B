@@ -11,8 +11,38 @@ namespace TPC_Resto
         {
             if (!IsPostBack)
             {
-                //CargarInsumos(); a desarrollar 
-                // friendly reminder mod DB para sumar IMG
+                CargarInsumos();
+            }
+        }
+
+        private void CargarInsumos()
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                // Consulta SQL para obtener los insumos
+                string consulta = @"SELECT Nombre, Descripcion, Img, Stock FROM Insumos"; 
+                //falta IMG en  DB!
+
+                datos.setConsulta(consulta);
+                datos.ejecutarLectura();
+
+                // Crear una lista temporal para almacenar los datos de insumos
+                var insumosList = new System.Data.DataTable();
+                insumosList.Load(datos.Lector);
+
+                // Enlazar el Repeater con los datos
+                rptInsumos.DataSource = insumosList;
+                rptInsumos.DataBind();
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores
+                Response.Write("<script>alert('Error al cargar insumos: " + ex.Message + "');</script>");
+            }
+            finally
+            {
+                datos.cerrarConexion();
             }
         }
     }
