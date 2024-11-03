@@ -8,6 +8,16 @@ namespace TPC_Resto
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Seguridad.sesionIniciada(Session["usuario"]))
+            {
+                Response.Redirect("Default.aspx", false);
+            }
+
+            if (!Seguridad.esAdmin(Session["usuario"]))
+            {
+                Response.Redirect("HomeMenu.aspx", false);
+            }
+
             if (!IsPostBack)
             {
                 CargarUsuarios();
