@@ -34,10 +34,16 @@
                 <h1>Admin Resto</h1>
             </div>
             <ul>
-                <li><a runat="server" href="~/Default.aspx">LogIn</a></li>
-                <li><a runat="server" href="~/Registro.aspx">Registrate</a></li>
-                <li><asp:LinkButton ID="logOut" OnClick="logOut_Click" runat="server" >Cerrar Sesion</asp:LinkButton></li>
-
+                <%if (!Negocio.Seguridad.sesionIniciada(Session["usuario"]))
+                  { %>
+                    <li><a runat="server" href="~/Default.aspx">LogIn</a></li>
+                    <li><a runat="server" href="~/Registro.aspx">Registrate</a></li>
+                <%}
+                  else
+                  { %>
+                    <li><a runat="server" href="~/Perfil.aspx">Perfil</a></li>
+                    <li><asp:LinkButton ID="logOut" OnClick="logOut_Click" runat="server" >Cerrar Sesion</asp:LinkButton></li>
+                <%} %>
             </ul>
         </nav>
 
