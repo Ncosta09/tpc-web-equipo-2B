@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Negocio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,10 @@ namespace TPC_Resto
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!Seguridad.esAdmin(Session["usuario"]))
+            {
+                Response.Redirect("HomeMenu.aspx", false);
+            }
         }
     }
 }

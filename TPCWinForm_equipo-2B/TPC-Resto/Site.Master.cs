@@ -13,5 +13,11 @@ namespace TPC_Resto
         {
 
         }
+
+        protected void logOut_Click(object sender, EventArgs e)
+        {
+            Session.Clear();
+            Response.Redirect("Default.aspx");
+        }
     }
 }

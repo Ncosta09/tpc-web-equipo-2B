@@ -18,6 +18,7 @@ CREATE TABLE Usuarios (
     IdUsuario INT PRIMARY KEY IDENTITY(1,1),
     Nombre VARCHAR(100) NOT NULL,
     Apellido VARCHAR(100) NOT NULL,
+	Imagen VARCHAR(150) NULL,
     Contraseña VARCHAR(100) NOT NULL,
     IdRol SMALLINT NOT NULL,
     Correo VARCHAR(100) NOT NULL,
@@ -74,4 +75,16 @@ CREATE TABLE DetallePedidos (
     FOREIGN KEY (IdPedido) REFERENCES Pedidos(IDPedido),
     FOREIGN KEY (IdInsumo) REFERENCES Insumos(IdInsumo)
 );
+GO
+
+INSERT INTO Roles (Descripcion) 
+VALUES 
+('Cliente'),
+('Mesero'),
+('Manager');
+GO
+
+INSERT INTO Usuarios (Nombre, Apellido, Imagen, Contraseña, IdRol, Correo, DNI)
+VALUES 
+('Juan', 'Pérez', 'https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58482.jpg', '1234', 3, 'test@mail.com', '12345678');
 GO
