@@ -1,4 +1,5 @@
-﻿using Negocio;
+﻿using Dominio;
+using Negocio;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -80,7 +81,14 @@ namespace TPC_Resto
             }
             else
             {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "showCard", "document.querySelector('.card').style.display = 'flex';", true);
+                // Obtengo el mesero asignado en la ddl y muestro en el card
+                Usuario meseroAsignado = meseroMesa.ObtenerMeseroPorMesa(int.Parse(numeroMesa));
+                if (meseroAsignado != null)
+                {
+                    numero.Text = numeroMesa; 
+                    nombre.Text = meseroAsignado.Nombre; 
+                }
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "showCard", "document.querySelector('.card').style.display = 'flex';", true);
             }
 
         }
@@ -88,27 +96,40 @@ namespace TPC_Resto
         protected void btnAsignarMesero_Click(object sender, EventArgs e)
         {
                 MesasSalon mesasSalon = new MesasSalon();
-           
+                MeseroXMesa meseroMesa = new MeseroXMesa();
             string numeroMesaStr = Session["NumeroMesa"] as string;
+            int idUsuario = int.Parse(ddlMeseros.SelectedValue);
 
-            // Verificar que el número de mesa no sea nulo
+
+            // Verifico que el número de mesa no sea nulo
             if (!string.IsNullOrEmpty(numeroMesaStr) && int.TryParse(numeroMesaStr, out int numeroMesa))
             {
-              
-                mesasSalon.ActualizarEstadoMesaUno(numeroMesa);
-                listarMesas();
+                // Verifico que se haya seleccionado un mesero
+                if (ddlMeseros.SelectedValue != "0")
+                {
+                    //inserto mesero en la mesa (db)
+                    meseroMesa.InsertarMeseroMesa(idUsuario, numeroMesa);
+
+                    // Actualizar estado de la mesa a 1 ocupada (db)
+                    mesasSalon.ActualizarEstadoMesaUno(numeroMesa);
+                    listarMesas();
+                }
             }
         }
 
         protected void BtnCerrarMesa_Click(object sender, EventArgs e)
         {
             MesasSalon mesasSalon = new MesasSalon();
+            MeseroXMesa meseroMesa = new MeseroXMesa();
 
             string numeroMesaStr = Session["NumeroMesa"] as string;
+            
 
             if (!string.IsNullOrEmpty(numeroMesaStr) && int.TryParse(numeroMesaStr, out int numeroMesa))
             {
-
+                // Borro mesero de la mesa (db)
+                //meseroMesa.DeleteMeseroMesa(idUsuario, numeroMesa);
+                // Actualizar estado de la mesa a 0 desocupada (db)
                 mesasSalon.ActualizarEstadoMesaCero(numeroMesa);
                 listarMesas();
             }
