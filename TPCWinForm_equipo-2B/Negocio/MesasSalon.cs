@@ -19,7 +19,7 @@ namespace Negocio
             try
             {
                 //Consulta a la DB ¬
-                datos.setConsulta("select m.NumeroMesa from Mesas as m;");
+                datos.setConsulta("select m.NumeroMesa, m.Estado from Mesas as m;");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -27,6 +27,7 @@ namespace Negocio
                     Mesa mes = new Mesa();
 
                     mes.NumeroMesa = datos.Lector["NumeroMesa"] is DBNull ? 0 : Convert.ToInt32(datos.Lector["NumeroMesa"]);
+                    mes.Estado = datos.Lector["Estado"] is DBNull ? 0 : Convert.ToInt32(datos.Lector["Estado"]);
                     lista.Add(mes);
                 }
 
@@ -36,6 +37,76 @@ namespace Negocio
             catch (Exception ex)
             {
 
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        public void ActualizarEstadoMesaUno(int numeroMesa)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                // Actualizar el estado de la mesa a 1 (ocupada)
+                datos.setConsulta("UPDATE Mesas SET Estado = 1 WHERE NumeroMesa = @NumeroMesa;");
+                datos.setParametro("@NumeroMesa", numeroMesa);
+                datos.ejecutarAccion(); 
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void ActualizarEstadoMesaCero(int numeroMesa)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                // Actualizar el estado de la mesa a 1 (ocupada)
+                datos.setConsulta("UPDATE Mesas SET Estado = 0 WHERE NumeroMesa = @NumeroMesa;");
+                datos.setParametro("@NumeroMesa", numeroMesa);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public int ObtenerEstadoMesa(int numeroMesa)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setConsulta("SELECT Estado FROM Mesas WHERE NumeroMesa = @NumeroMesa;");
+                datos.setParametro("@NumeroMesa", numeroMesa);
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    return datos.Lector["Estado"] is DBNull ? 0 : Convert.ToInt32(datos.Lector["Estado"]);
+                }
+                else
+                {
+                    throw new Exception("Mesa no encontrada.");
+                }
+            }
+            catch (Exception ex)
+            {
                 throw ex;
             }
             finally

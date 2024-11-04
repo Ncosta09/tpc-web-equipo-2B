@@ -11,6 +11,13 @@ namespace TPC_Resto
 {
     public partial class Salon : System.Web.UI.Page
     {
+        private void listarMesas()
+        {
+            MesasSalon mesasSalon = new MesasSalon();
+            RepeaterMesas.DataSource = mesasSalon.listarMesa();
+            RepeaterMesas.DataBind();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Seguridad.sesionIniciada(Session["usuario"]))
@@ -18,14 +25,11 @@ namespace TPC_Resto
                 Response.Redirect("Default.aspx", false);
             }
 
+
             if (!IsPostBack)
             {
-                MesasSalon mesasSalon = new MesasSalon();
-                RepeaterMesas.DataSource = mesasSalon.listarMesa();
-                RepeaterMesas.DataBind();
+                listarMesas();
             }
-
-
 
             if (!IsPostBack)
             {
@@ -54,13 +58,15 @@ namespace TPC_Resto
         }
         protected void Mesa_Click(object sender, EventArgs e)
         {
-
+            MeseroXMesa meseroMesa = new MeseroXMesa();
+            MesasSalon mesasSalon = new MesasSalon();
             Button clickedButton = (Button)sender;
             string numeroMesa = clickedButton.Text;
             lblNumeroMesa.Text = "Mesa: " + numeroMesa;
             Session["NumeroMesa"] = numeroMesa;
+            int estadoMesa = mesasSalon.ObtenerEstadoMesa(int.Parse(numeroMesa));
 
-            MeseroXMesa meseroMesa = new MeseroXMesa();
+
             ddlMeseros.DataSource = meseroMesa.listarMesero();
             ddlMeseros.DataTextField = "Nombre";
             ddlMeseros.DataValueField = "ID";
@@ -68,14 +74,44 @@ namespace TPC_Resto
 
             ddlMeseros.Items.Insert(0, new ListItem("Selecciona un mesero", "0"));
 
+            if (estadoMesa == 0) 
+            {
             ScriptManager.RegisterStartupScript(this, this.GetType(), "showModal", "showModal();", true);
-
+            }
+            else
+            {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "showCard", "document.querySelector('.card').style.display = 'flex';", true);
+            }
 
         }
 
         protected void btnAsignarMesero_Click(object sender, EventArgs e)
         {
+                MesasSalon mesasSalon = new MesasSalon();
+           
+            string numeroMesaStr = Session["NumeroMesa"] as string;
 
+            // Verificar que el número de mesa no sea nulo
+            if (!string.IsNullOrEmpty(numeroMesaStr) && int.TryParse(numeroMesaStr, out int numeroMesa))
+            {
+              
+                mesasSalon.ActualizarEstadoMesaUno(numeroMesa);
+                listarMesas();
+            }
+        }
+
+        protected void BtnCerrarMesa_Click(object sender, EventArgs e)
+        {
+            MesasSalon mesasSalon = new MesasSalon();
+
+            string numeroMesaStr = Session["NumeroMesa"] as string;
+
+            if (!string.IsNullOrEmpty(numeroMesaStr) && int.TryParse(numeroMesaStr, out int numeroMesa))
+            {
+
+                mesasSalon.ActualizarEstadoMesaCero(numeroMesa);
+                listarMesas();
+            }
         }
     }
 }

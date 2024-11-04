@@ -11,3 +11,6 @@ function closeModal() {
 document.getElementsByClassName("close")[0].onclick = function () {
     closeModal();
 }
+
+document.getElementById("btnAsignarMesero").addEventListener("click", function () {
+    document.querySelector(".card").style.display = "flex";})
