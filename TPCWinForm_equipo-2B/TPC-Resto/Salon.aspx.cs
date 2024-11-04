@@ -85,6 +85,7 @@ namespace TPC_Resto
                 Usuario meseroAsignado = meseroMesa.ObtenerMeseroPorMesa(int.Parse(numeroMesa));
                 if (meseroAsignado != null)
                 {
+                    ViewState["IdMeseroAsignado"] = meseroAsignado.ID;
                     numero.Text = numeroMesa; 
                     nombre.Text = meseroAsignado.Nombre; 
                 }
@@ -123,12 +124,12 @@ namespace TPC_Resto
             MeseroXMesa meseroMesa = new MeseroXMesa();
 
             string numeroMesaStr = Session["NumeroMesa"] as string;
-            
+            int idUsuario = (int)ViewState["IdMeseroAsignado"];
 
             if (!string.IsNullOrEmpty(numeroMesaStr) && int.TryParse(numeroMesaStr, out int numeroMesa))
             {
                 // Borro mesero de la mesa (db)
-                //meseroMesa.DeleteMeseroMesa(idUsuario, numeroMesa);
+                meseroMesa.DeleteMeseroMesa(idUsuario, numeroMesa);
                 // Actualizar estado de la mesa a 0 desocupada (db)
                 mesasSalon.ActualizarEstadoMesaCero(numeroMesa);
                 listarMesas();
