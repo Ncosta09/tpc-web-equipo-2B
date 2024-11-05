@@ -34,7 +34,7 @@
     border-radius: 0.35rem;
     width: 93%;
     margin: 20px auto;
-    height: 200px;
+    height: 95%;
     display: none;
     flex-direction: column;
     justify-content: space-between;
@@ -58,14 +58,18 @@
 
 .row {
     display: flex;
-    justify-content: start;
-    gap: 20px;
+    justify-content: center;
+    gap: 200px;
+    width: 100%;
+    margin: 20px auto 0;
+    border-bottom: 1px solid;
 }
 
 .grid {
     border: 1px solid #000;
     overflow-y: auto;
     margin: 10px 0;
+    height: 80%;
 }
 
 .gridInsumos {
