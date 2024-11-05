@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccesoDatos.cs" />
+    <Compile Include="Insumos.cs" />
     <Compile Include="LogInUsuario.cs" />
     <Compile Include="MesasSalon.cs" />
     <Compile Include="MeseroXMesa.cs" />
