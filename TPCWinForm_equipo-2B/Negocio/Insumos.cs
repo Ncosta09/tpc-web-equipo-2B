@@ -1,48 +1,40 @@
 ﻿using Dominio;
-using System;
+using Negocio;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
 
-namespace Negocio
+public class Insumos
 {
-    public class Insumos
+    public List<Insumo> listarInsumos()
     {
-        public List<Insumo> listarInsumos()
+        List<Insumo> lista = new List<Insumo>();
+        AccesoDatos datos = new AccesoDatos();
+
+        try
         {
-            List<Insumo> lista = new List<Insumo>();
-            AccesoDatos datos = new AccesoDatos();
+            datos.setConsulta("SELECT i.IdInsumo, i.Nombre, i.Precio, i.Stock FROM Insumos AS i;");
+            datos.ejecutarLectura();
 
-            try
+            while (datos.Lector.Read())
             {
-                //Consulta a la DB ¬
-                datos.setConsulta("SELECT i.IdInsumo, i.Nombre, i.Precio, i.Stock FROM Insumos AS i;;");
-                datos.ejecutarLectura();
+                Insumo ins = new Insumo();
 
-                while (datos.Lector.Read())
-                {
-                    Insumo ins = new Insumo();
-
-                   ins.ID = datos.Lector["ID"] is DBNull ? 0 : Convert.ToInt32(datos.Lector["ID"]);
-                    ins.Nombre = datos.Lector["Nombre"] is DBNull ? "no especificado" : Convert.ToString(datos.Lector["Nombre"]);
-                    ins.Precio = datos.Lector["Precio"] is DBNull ? 0 : Convert.ToInt32(datos.Lector["Precio"]);
-                    ins.Stock = datos.Lector["Stock"] is DBNull ? 0 : Convert.ToInt32(datos.Lector["Stock"]);
-                    lista.Add(ins);
-                }
-
-
-                return lista;
+                ins.ID = datos.Lector["IdInsumo"] is DBNull ? 0 : Convert.ToInt32(datos.Lector["IdInsumo"]);
+                ins.Nombre = datos.Lector["Nombre"] is DBNull ? "no especificado" : Convert.ToString(datos.Lector["Nombre"]);
+                ins.Precio = datos.Lector["Precio"] is DBNull ? 0 : Convert.ToDecimal(datos.Lector["Precio"]);
+                ins.Stock = datos.Lector["Stock"] is DBNull ? 0 : Convert.ToInt32(datos.Lector["Stock"]);
+                lista.Add(ins);
             }
-            catch (Exception ex)
-            {
 
-                throw ex;
-            }
-            finally
-            {
-                datos.cerrarConexion();
-            }
+            return lista;
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+        finally
+        {
+            datos.cerrarConexion();
         }
     }
 }

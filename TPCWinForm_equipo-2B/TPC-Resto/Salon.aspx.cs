@@ -32,30 +32,6 @@ namespace TPC_Resto
                 listarMesas();
             }
 
-            if (!IsPostBack)
-            {
-
-                DataTable dt = new DataTable();
-                dt.Columns.AddRange(new DataColumn[3]
-                {
-                    new DataColumn("Insumo", typeof(string)),
-                    new DataColumn("Cantidad", typeof(int)),
-                    new DataColumn("Precio", typeof(decimal))
-                });
-
-                //datos forzados para mostrar el grid
-                dt.Rows.Add("Insumo 1", 10, 100m);
-                dt.Rows.Add("Insumo 2", 15, 450m);
-                dt.Rows.Add("Insumo 3", 20, 340m);
-                dt.Rows.Add("Insumo 4", 25, 520.25m);
-                dt.Rows.Add("Insumo 5", 30, 213.44m);
-                dt.Rows.Add("Insumo 6", 10, 100m);
-                dt.Rows.Add("Insumo 7", 15, 450m);
-                dt.Rows.Add("Insumo 8", 20, 340m);
-
-                gridInsumos.DataSource = dt;
-                gridInsumos.DataBind();
-            }
         }
         protected void Mesa_Click(object sender, EventArgs e)
         {
@@ -133,6 +109,51 @@ namespace TPC_Resto
                 // Actualizar estado de la mesa a 0 desocupada (db)
                 mesasSalon.ActualizarEstadoMesaCero(numeroMesa);
                 listarMesas();
+            }
+        }
+
+        protected void BtnAgregarInsumo_Click(object sender, EventArgs e)
+        {
+            Insumos insumos = new Insumos();
+
+            ddlInsumos.DataSource = insumos.listarInsumos();
+            ddlInsumos.DataTextField = "Nombre";
+            ddlInsumos.DataValueField = "ID";
+            ddlInsumos.DataBind();
+
+            ddlInsumos.Items.Insert(0, new ListItem("Selecciona un insumo", "0"));
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "showModalInsumo", "showModalInsumo();", true);
+        }
+
+        protected void Insumos_Click(object sender, EventArgs e)
+        {
+            if (ddlInsumos.SelectedValue != "0")
+            {
+                string nombreInsumo = ddlInsumos.SelectedItem.Text;
+                int cantidad = 1;
+                decimal precio = 100; 
+
+                DataTable dt = Session["InsumosDataTable"] as DataTable;
+                if (dt == null)
+                {
+                    dt = new DataTable();
+                    dt.Columns.AddRange(new DataColumn[3]
+                    {
+                new DataColumn("Insumo", typeof(string)),
+                new DataColumn("Cantidad", typeof(int)),
+                new DataColumn("Precio", typeof(decimal))
+                    });
+                }
+
+                dt.Rows.Add(nombreInsumo, cantidad, precio);
+
+                Session["InsumosDataTable"] = dt;
+
+                gridInsumos.DataSource = dt;
+                gridInsumos.DataBind();
+
+                ddlInsumos.SelectedIndex = 0;
             }
         }
     }
