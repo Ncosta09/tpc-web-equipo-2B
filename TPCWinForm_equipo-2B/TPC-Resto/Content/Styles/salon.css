@@ -142,3 +142,18 @@
 .mesa-ocupada {
     background-color: red;
 }
+
+.container-insumos {
+    display: flex;
+    width: 100%;
+    gap: 5px;
+    margin-bottom: 5px;
+}
+
+.txtBoxInsumos{
+    width: 10%;
+}
+
+.ddlInsumos{
+    width: 90%;
+}

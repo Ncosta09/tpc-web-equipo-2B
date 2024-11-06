@@ -32,6 +32,8 @@ namespace TPC_Resto
                 listarMesas();
             }
 
+
+
         }
         protected void Mesa_Click(object sender, EventArgs e)
         {
@@ -78,6 +80,7 @@ namespace TPC_Resto
             int idUsuario = int.Parse(ddlMeseros.SelectedValue);
 
 
+
             // Verifico que el número de mesa no sea nulo
             if (!string.IsNullOrEmpty(numeroMesaStr) && int.TryParse(numeroMesaStr, out int numeroMesa))
             {
@@ -86,6 +89,11 @@ namespace TPC_Resto
                 {
                     //inserto mesero en la mesa (db)
                     meseroMesa.InsertarMeseroMesa(idUsuario, numeroMesa);
+
+                    PedidosSalon pedidosSalon = new PedidosSalon();
+                    DateTime fechaInicio = DateTime.Now;
+                    int estado = 0;
+                    pedidosSalon.RegistrarPedido(numeroMesa, idUsuario, fechaInicio, estado);
 
                     // Actualizar estado de la mesa a 1 ocupada (db)
                     mesasSalon.ActualizarEstadoMesaUno(numeroMesa);
@@ -128,25 +136,42 @@ namespace TPC_Resto
 
         protected void Insumos_Click(object sender, EventArgs e)
         {
+
             if (ddlInsumos.SelectedValue != "0")
             {
+                Insumos insumos = new Insumos();
+                List<Insumo> listaInsumos = insumos.listarInsumos();
+
+                decimal precioTotalMesa = 0;
+
                 string nombreInsumo = ddlInsumos.SelectedItem.Text;
-                int cantidad = 1;
-                decimal precio = 100; 
+                int cantidad = int.Parse(txtCantidad.Text);
+                int insumoId = int.Parse(ddlInsumos.SelectedValue);
+
+                Insumo insumoSeleccionado = listaInsumos.FirstOrDefault(i => i.ID == insumoId);
+                if (insumoSeleccionado == null)
+                {
+                    return;
+                }
+
+                decimal precioUnitario = insumoSeleccionado.Precio;
+                decimal precioTotal = precioUnitario * cantidad;
+                precioTotalMesa += precioTotal;
 
                 DataTable dt = Session["InsumosDataTable"] as DataTable;
                 if (dt == null)
                 {
                     dt = new DataTable();
-                    dt.Columns.AddRange(new DataColumn[3]
+                    dt.Columns.AddRange(new DataColumn[4]
                     {
-                new DataColumn("Insumo", typeof(string)),
+                 new DataColumn("Insumo", typeof(string)),
                 new DataColumn("Cantidad", typeof(int)),
-                new DataColumn("Precio", typeof(decimal))
+                new DataColumn("Precio Unitario", typeof(decimal)),
+                new DataColumn("Precio Total", typeof(decimal))
                     });
                 }
 
-                dt.Rows.Add(nombreInsumo, cantidad, precio);
+                dt.Rows.Add(nombreInsumo, cantidad, precioUnitario, precioTotal);
 
                 Session["InsumosDataTable"] = dt;
 
@@ -154,6 +179,8 @@ namespace TPC_Resto
                 gridInsumos.DataBind();
 
                 ddlInsumos.SelectedIndex = 0;
+
+                lblTotal.Text = "total = " + precioTotalMesa.ToString("C");
             }
         }
     }
