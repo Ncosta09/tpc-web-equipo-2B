@@ -65,6 +65,10 @@ CREATE TABLE Insumos (
     Stock INT NOT NULL
 );
 GO
+-- MODI
+ALTER TABLE Insumos
+ADD ImagenURL VARCHAR(255) NULL;
+GO
 
 -- Crear tabla DetallePedidos
 CREATE TABLE DetallePedidos (
@@ -115,18 +119,18 @@ VALUES
 (12);
 GO
 
-INSERT INTO Insumos (Nombre, Precio, Stock)
+INSERT INTO Insumos (Nombre, Precio, Stock, ImagenURL)
 VALUES 
-('Papas fritas', 350.00, 100),
-('Hamburguesa', 700.00, 50),
-('Pizza Margarita', 1000.00, 30),
-('Ensalada César', 600.00, 20),
-('Refresco', 200.00, 150),
-('Carne de Res', 1200.00, 40),
-('Pechuga de Pollo', 900.00, 60),
-('Tarta de Jamón y Queso', 800.00, 25),
-('Cerveza Artesanal', 350.00, 70),
-('Vino Malbec', 1200.00, 35);
+    ('Papas fritas', 350.00, 100, 'https://example.com/images/papas-fritas.jpg'),
+    ('Hamburguesa', 700.00, 50, 'https://example.com/images/hamburguesa.jpg'),
+    ('Pizza Margarita', 1000.00, 30, 'https://example.com/images/pizza-margarita.jpg'),
+    ('Ensalada César', 600.00, 20, 'https://example.com/images/ensalada-cesar.jpg'),
+    ('Refresco', 200.00, 150, 'https://example.com/images/refresco.jpg'),
+    ('Carne de Res', 1200.00, 40, 'https://example.com/images/carne-res.jpg'),
+    ('Pechuga de Pollo', 900.00, 60, 'https://example.com/images/pechuga-pollo.jpg'),
+    ('Tarta de Jamón y Queso', 800.00, 25, 'https://example.com/images/tarta-jamon-queso.jpg'),
+    ('Cerveza Artesanal', 350.00, 70, 'https://example.com/images/cerveza-artesanal.jpg'),
+    ('Vino Malbec', 1200.00, 35, 'https://example.com/images/vino-malbec.jpg');
 GO
 
 INSERT INTO Usuarios (Nombre, Apellido, Imagen, Contraseña, IdRol, Correo, DNI)
@@ -148,3 +152,4 @@ ALTER TABLE DetallePedidos
 ADD PrecioUnitario DECIMAL(10, 2) NOT NULL,
     PrecioTotal DECIMAL(10, 2) NOT NULL;
 GO
+
