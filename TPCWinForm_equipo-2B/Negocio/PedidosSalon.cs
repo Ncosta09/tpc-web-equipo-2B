@@ -31,13 +31,12 @@ namespace Negocio
             }
         }
 
-        public void RegistrarDetallePedido(int idPedido, int idInsumo, int cantidad, decimal precioUnitario)
+        public void RegistrarDetallePedido(int idPedido, int idInsumo, int cantidad, decimal precioUnitario, decimal precioTotal)
         {
             AccesoDatos datos = new AccesoDatos();
 
             try
             {
-                decimal precioTotal = cantidad * precioUnitario;
 
                 datos.setConsulta("INSERT INTO DetallePedidos (IdPedido, IdInsumo, Cantidad, PrecioUnitario, PrecioTotal) VALUES (@IdPedido, @IdInsumo, @Cantidad, @PrecioUnitario, @PrecioTotal);");
                 datos.setParametro("@IdPedido", idPedido);
@@ -64,10 +63,7 @@ namespace Negocio
 
             try
             {
-                datos.setConsulta("SELECT dp.IdDetalle, dp.IdInsumo, dp.Cantidad, dp.PrecioUnitario, dp.PrecioTotal, i.Nombre AS InsumoNombre " +
-                                  "FROM DetallePedidos dp " +
-                                  "INNER JOIN Insumos i ON dp.IdInsumo = i.IdInsumo " +
-                                  "WHERE dp.IdPedido = @IdPedido;");
+                datos.setConsulta("SELECT dp.IdDetalle, dp.IdInsumo, dp.Cantidad, dp.PrecioUnitario, dp.PrecioTotal, i.Nombre AS InsumoNombre " + "FROM DetallePedidos dp " + "INNER JOIN Insumos i ON dp.IdInsumo = i.IdInsumo " + "WHERE dp.IdPedido = @IdPedido;");
                 datos.setParametro("@IdPedido", idPedido);
                 datos.ejecutarLectura();
 
@@ -107,12 +103,7 @@ namespace Negocio
 
             try
             {
-                datos.setConsulta("SELECT p.IDPedido, p.Estado, p.FechaInicio, p.FechaCierre, p.IdMesa, p.IdUsuario, " +
-                                  "m.NumeroMesa, u.Nombre AS UsuarioNombre " +
-                                  "FROM Pedidos p " +
-                                  "INNER JOIN Mesas m ON p.IdMesa = m.IdMesa " +
-                                  "INNER JOIN Usuarios u ON p.IdUsuario = u.IdUsuario " +
-                                  "WHERE p.IDPedido = @IdPedido;");
+                datos.setConsulta("SELECT p.IDPedido, p.Estado, p.FechaInicio, p.FechaCierre, p.IdMesa, p.IdUsuario, " + "m.NumeroMesa, u.Nombre AS UsuarioNombre " + "FROM Pedidos p " + "INNER JOIN Mesas m ON p.IdMesa = m.IdMesa " + "INNER JOIN Usuarios u ON p.IdUsuario = u.IdUsuario " + "WHERE p.IDPedido = @IdPedido;");
                 datos.setParametro("@IdPedido", idPedido);
                 datos.ejecutarLectura();
 
@@ -140,5 +131,30 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        public int ObtenerPedidoActivoPorMesa(int idMesa)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setConsulta("SELECT IDPedido FROM Pedidos WHERE IdMesa = @IdMesa AND Estado = 0");
+                datos.setParametro("@IdMesa", idMesa);
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    return Convert.ToInt32(datos.Lector["IDPedido"]);
+                }
+                return -1;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
     }
 }

@@ -59,7 +59,7 @@ namespace TPC_Resto
             }
             else
             {
-                // Obtengo el mesero asignado en la ddl y muestro en el card
+                //Obtengo el mesero asignado en la ddl y muestro en el card
                 Usuario meseroAsignado = meseroMesa.ObtenerMeseroPorMesa(int.Parse(numeroMesa));
                 if (meseroAsignado != null)
                 {
@@ -81,10 +81,10 @@ namespace TPC_Resto
 
 
 
-            // Verifico que el número de mesa no sea nulo
+            //Verifico que el número de mesa no sea nulo
             if (!string.IsNullOrEmpty(numeroMesaStr) && int.TryParse(numeroMesaStr, out int numeroMesa))
             {
-                // Verifico que se haya seleccionado un mesero
+                //Verifico que se haya seleccionado un mesero
                 if (ddlMeseros.SelectedValue != "0")
                 {
                     //inserto mesero en la mesa (db)
@@ -93,9 +93,11 @@ namespace TPC_Resto
                     PedidosSalon pedidosSalon = new PedidosSalon();
                     DateTime fechaInicio = DateTime.Now;
                     int estado = 0;
+
+                    //Creacion de pedido
                     pedidosSalon.RegistrarPedido(numeroMesa, idUsuario, fechaInicio, estado);
 
-                    // Actualizar estado de la mesa a 1 ocupada (db)
+                    //Actualizar estado de la mesa a 1 ocupada (db)
                     mesasSalon.ActualizarEstadoMesaUno(numeroMesa);
                     listarMesas();
                 }
@@ -112,9 +114,9 @@ namespace TPC_Resto
 
             if (!string.IsNullOrEmpty(numeroMesaStr) && int.TryParse(numeroMesaStr, out int numeroMesa))
             {
-                // Borro mesero de la mesa (db)
+                //Borro mesero de la mesa (db)
                 meseroMesa.DeleteMeseroMesa(idUsuario, numeroMesa);
-                // Actualizar estado de la mesa a 0 desocupada (db)
+                //Actualizar estado de la mesa a 0 desocupada (db)
                 mesasSalon.ActualizarEstadoMesaCero(numeroMesa);
                 listarMesas();
             }
@@ -157,6 +159,16 @@ namespace TPC_Resto
                 decimal precioUnitario = insumoSeleccionado.Precio;
                 decimal precioTotal = precioUnitario * cantidad;
                 precioTotalMesa += precioTotal;
+                int idMesa = Convert.ToInt32(Session["NumeroMesa"]);
+
+
+                PedidosSalon pedidosSalon = new PedidosSalon();
+
+                //obtengo el pedido activo de la mesa
+                int idPedidoActivo = pedidosSalon.ObtenerPedidoActivoPorMesa(idMesa);
+
+                //cargo el detalle de ese pedido
+                pedidosSalon.RegistrarDetallePedido(idPedidoActivo, insumoId, cantidad, precioUnitario, precioTotal);
 
                 DataTable dt = Session["InsumosDataTable"] as DataTable;
                 if (dt == null)
