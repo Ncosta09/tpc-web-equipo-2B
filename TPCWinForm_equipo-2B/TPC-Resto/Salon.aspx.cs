@@ -33,6 +33,10 @@ namespace TPC_Resto
             }
 
 
+            if (Session["NumeroMesa"] != null)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "showCard", "document.querySelector('.card').style.display = 'flex';", true);
+            }
 
         }
         protected void Mesa_Click(object sender, EventArgs e)
@@ -100,6 +104,7 @@ namespace TPC_Resto
 
                     //Actualizar estado de la mesa a 1 ocupada (db)
                     mesasSalon.ActualizarEstadoMesaUno(numeroMesa);
+
                     listarMesas();
                 }
             }
@@ -119,6 +124,7 @@ namespace TPC_Resto
                 meseroMesa.DeleteMeseroMesa(idUsuario, numeroMesa);
                 //Actualizar estado de la mesa a 0 desocupada (db)
                 mesasSalon.ActualizarEstadoMesaCero(numeroMesa);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "closeCard", "document.querySelector('.card').style.display = 'none';", true);
                 listarMesas();
             }
         }
@@ -171,6 +177,7 @@ namespace TPC_Resto
 
                 // Reseteo el dropdown de insumos
                 ddlInsumos.SelectedIndex = 0;
+                txtCantidad.Text = "";
             }
         }
 
@@ -208,6 +215,7 @@ namespace TPC_Resto
             gridInsumos.DataBind();
 
             lblTotal.Text = "total = " + precioTotalMesa.ToString("C");
+
         }
 
     }

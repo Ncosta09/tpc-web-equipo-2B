@@ -46,7 +46,7 @@
 
                      <div class="row-btn">
                          <div class="botons">
-                     <asp:Button ID="BtnAgregarInsumo" runat="server" Text="agregar insumo" OnClick="BtnAgregarInsumo_Click"/> <%// habre popup con insumos, se seleccionan y se agregan al gridview (todos sus valores) %>
+                     <asp:Button ID="BtnAgregarInsumo" runat="server" Text="agregar insumo" OnClick="BtnAgregarInsumo_Click" OnClientClick="showModalInsumo(); return true;"/> <%// habre popup con insumos, se seleccionan y se agregan al gridview (todos sus valores) %>
                      <asp:Button ID="BtnCerrarMesa" runat="server" Text="cerrar mesa" OnClick="BtnCerrarMesa_Click" /> <%// cierra la mesa %>
                          </div>
                          <asp:Label ID="lblTotal" runat="server" Text=""></asp:Label> <% // total forzado para primera vista %>
@@ -63,7 +63,7 @@
                 <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
                   <div class="container-insumos">
                 <asp:DropDownList cssClass="ddlInsumos" ID="ddlInsumos" runat="server"></asp:DropDownList>
-                  <asp:TextBox cssClass="txtBoxInsumos" ID="txtCantidad" runat="server" TextMode="Number" oninput="this.value = this.value.replace(/[^0-9]/g, '')" Text="0"></asp:TextBox>
+                  <asp:TextBox cssClass="txtBoxInsumos" ID="txtCantidad" runat="server" TextMode="Number" oninput="this.value = this.value.replace(/[^1-9]/g, '')" Text="0"></asp:TextBox>
                    </div>
 
                 <asp:Button ID="Insumos" runat="server" Text="Agregar Insumo" OnClick="Insumos_Click"/>
