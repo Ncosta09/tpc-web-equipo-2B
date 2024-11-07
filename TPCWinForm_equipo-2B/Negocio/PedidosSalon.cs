@@ -9,16 +9,36 @@ namespace Negocio
 {
     public class PedidosSalon
     {
+
+        public void CerrarPedido(int idPedido)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setConsulta("UPDATE Pedidos SET Estado = 1, FechaCierre = GETDATE() WHERE IdPedido = @IdPedido and Estado = 0;");
+                datos.setParametro("@IdPedido", idPedido);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
         public void RegistrarPedido(int idMesa, int idUsuario, DateTime fechaInicio, int estado)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setConsulta("INSERT INTO Pedidos (IdMesa, IdUsuario, Estado, FechaInicio) VALUES (@IdMesa, @IdUsuario, @Estado, @FechaInicio);");
+                datos.setConsulta("INSERT INTO Pedidos (IdMesa, IdUsuario, Estado, FechaInicio) VALUES (@IdMesa, @IdUsuario, @Estado, @FechaInicio );");
                 datos.setParametro("@IdMesa", idMesa);
                 datos.setParametro("@IdUsuario", idUsuario);
-                datos.setParametro("@Estado", estado);
-                datos.setParametro("@FechaInicio", fechaInicio);
+                datos.setParametro("@Estado", estado); // PÓDRIA PASAR DIRECTAMENTE COMO VALUE EL 0 EN ESTADO PARA NO DECLARLO EN EL BACK
+                datos.setParametro("@FechaInicio", fechaInicio); //MISMO CASO QUE EVENTO CON GETDATE()
                 datos.ejecutarAccion(); 
             }
             catch (Exception ex)

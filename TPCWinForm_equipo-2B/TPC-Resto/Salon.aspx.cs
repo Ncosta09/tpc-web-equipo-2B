@@ -114,12 +114,18 @@ namespace TPC_Resto
         {
             MesasSalon mesasSalon = new MesasSalon();
             MeseroXMesa meseroMesa = new MeseroXMesa();
+            PedidosSalon pedidosSalon = new PedidosSalon();
+           
+            int idMesa = Convert.ToInt32(Session["NumeroMesa"]);
+            int idPedidoActivo = pedidosSalon.ObtenerPedidoActivoPorMesa(idMesa);
 
             string numeroMesaStr = Session["NumeroMesa"] as string;
             int idUsuario = (int)ViewState["IdMeseroAsignado"];
 
             if (!string.IsNullOrEmpty(numeroMesaStr) && int.TryParse(numeroMesaStr, out int numeroMesa))
             {
+                //Cerrar pedido(db)
+                pedidosSalon.CerrarPedido(idPedidoActivo);
                 //Borro mesero de la mesa (db)
                 meseroMesa.DeleteMeseroMesa(idUsuario, numeroMesa);
                 //Actualizar estado de la mesa a 0 desocupada (db)
