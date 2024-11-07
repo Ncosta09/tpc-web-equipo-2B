@@ -45,32 +45,33 @@ namespace TPC_Resto
             Session["NumeroMesa"] = numeroMesa;
             int estadoMesa = mesasSalon.ObtenerEstadoMesa(int.Parse(numeroMesa));
 
-
             ddlMeseros.DataSource = meseroMesa.listarMesero();
             ddlMeseros.DataTextField = "Nombre";
             ddlMeseros.DataValueField = "ID";
             ddlMeseros.DataBind();
-
             ddlMeseros.Items.Insert(0, new ListItem("Selecciona un mesero", "0"));
 
-            if (estadoMesa == 0) 
+            if (estadoMesa == 0)
             {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "showModal", "showModal();", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "showModal", "showModal();", true);
             }
             else
             {
-                //Obtengo el mesero asignado en la ddl y muestro en el card
                 Usuario meseroAsignado = meseroMesa.ObtenerMeseroPorMesa(int.Parse(numeroMesa));
                 if (meseroAsignado != null)
                 {
                     ViewState["IdMeseroAsignado"] = meseroAsignado.ID;
-                    numero.Text = numeroMesa; 
-                    nombre.Text = meseroAsignado.Nombre; 
+                    numero.Text = numeroMesa;
+                    nombre.Text = meseroAsignado.Nombre;
                 }
+
+                // Actualizo el grid con los detalles del pedido activo de la mesa seleccionada
+                ActualizarGridInsumos(int.Parse(numeroMesa));
+
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "showCard", "document.querySelector('.card').style.display = 'flex';", true);
             }
-
         }
+
 
         protected void btnAsignarMesero_Click(object sender, EventArgs e)
         {
@@ -138,13 +139,10 @@ namespace TPC_Resto
 
         protected void Insumos_Click(object sender, EventArgs e)
         {
-
             if (ddlInsumos.SelectedValue != "0")
             {
                 Insumos insumos = new Insumos();
                 List<Insumo> listaInsumos = insumos.listarInsumos();
-
-                decimal precioTotalMesa = 0;
 
                 string nombreInsumo = ddlInsumos.SelectedItem.Text;
                 int cantidad = int.Parse(txtCantidad.Text);
@@ -158,42 +156,59 @@ namespace TPC_Resto
 
                 decimal precioUnitario = insumoSeleccionado.Precio;
                 decimal precioTotal = precioUnitario * cantidad;
-                precioTotalMesa += precioTotal;
                 int idMesa = Convert.ToInt32(Session["NumeroMesa"]);
-
 
                 PedidosSalon pedidosSalon = new PedidosSalon();
 
-                //obtengo el pedido activo de la mesa
+                // Obtengo el pedido activo de la mesa
                 int idPedidoActivo = pedidosSalon.ObtenerPedidoActivoPorMesa(idMesa);
 
-                //cargo el detalle de ese pedido
+                // Registro el detalle de ese pedido
                 pedidosSalon.RegistrarDetallePedido(idPedidoActivo, insumoId, cantidad, precioUnitario, precioTotal);
 
-                DataTable dt = Session["InsumosDataTable"] as DataTable;
-                if (dt == null)
-                {
-                    dt = new DataTable();
-                    dt.Columns.AddRange(new DataColumn[4]
-                    {
-                 new DataColumn("Insumo", typeof(string)),
+                // Actualizo el gridInsumos con el nuevo pedido y sus detalles
+                ActualizarGridInsumos(idMesa);
+
+                // Reseteo el dropdown de insumos
+                ddlInsumos.SelectedIndex = 0;
+            }
+        }
+
+        private void ActualizarGridInsumos(int numeroMesa)
+        {
+            PedidosSalon pedidosSalon = new PedidosSalon();
+
+            // Obtener el pedido activo para la mesa
+            int idPedidoActivo = pedidosSalon.ObtenerPedidoActivoPorMesa(numeroMesa);
+
+            // Obtener detalles del pedido
+            List<DetallePedido> detallesPedido = pedidosSalon.ObtenerDetallesPedido(idPedidoActivo);
+
+            // Crear DataTable para cargar los detalles del pedido
+            DataTable dt = new DataTable();
+            dt.Columns.AddRange(new DataColumn[4]
+            {
+                new DataColumn("Insumo", typeof(string)),
                 new DataColumn("Cantidad", typeof(int)),
                 new DataColumn("Precio Unitario", typeof(decimal)),
                 new DataColumn("Precio Total", typeof(decimal))
-                    });
-                }
+            });
 
-                dt.Rows.Add(nombreInsumo, cantidad, precioUnitario, precioTotal);
+            decimal precioTotalMesa = 0;
 
-                Session["InsumosDataTable"] = dt;
-
-                gridInsumos.DataSource = dt;
-                gridInsumos.DataBind();
-
-                ddlInsumos.SelectedIndex = 0;
-
-                lblTotal.Text = "total = " + precioTotalMesa.ToString("C");
+            // Agregar los detalles del pedido al DataTable
+            foreach (var detalle in detallesPedido)
+            {
+                dt.Rows.Add(detalle.Insumo.Nombre, detalle.Cantidad, detalle.PrecioUnitario, detalle.PrecioTotal);
+                precioTotalMesa += detalle.PrecioTotal;
             }
+
+            // Enlazar el DataTable al GridView y mostrar el total
+            gridInsumos.DataSource = dt;
+            gridInsumos.DataBind();
+
+            lblTotal.Text = "total = " + precioTotalMesa.ToString("C");
         }
+
     }
 }
