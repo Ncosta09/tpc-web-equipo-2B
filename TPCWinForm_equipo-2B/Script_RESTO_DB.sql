@@ -121,16 +121,16 @@ GO
 
 INSERT INTO Insumos (Nombre, Precio, Stock, ImagenURL)
 VALUES 
-    ('Papas fritas', 350.00, 100, 'https://example.com/images/papas-fritas.jpg'),
-    ('Hamburguesa', 700.00, 50, 'https://example.com/images/hamburguesa.jpg'),
-    ('Pizza Margarita', 1000.00, 30, 'https://example.com/images/pizza-margarita.jpg'),
-    ('Ensalada César', 600.00, 20, 'https://example.com/images/ensalada-cesar.jpg'),
-    ('Refresco', 200.00, 150, 'https://example.com/images/refresco.jpg'),
-    ('Carne de Res', 1200.00, 40, 'https://example.com/images/carne-res.jpg'),
-    ('Pechuga de Pollo', 900.00, 60, 'https://example.com/images/pechuga-pollo.jpg'),
-    ('Tarta de Jamón y Queso', 800.00, 25, 'https://example.com/images/tarta-jamon-queso.jpg'),
-    ('Cerveza Artesanal', 350.00, 70, 'https://example.com/images/cerveza-artesanal.jpg'),
-    ('Vino Malbec', 1200.00, 35, 'https://example.com/images/vino-malbec.jpg');
+    ('Papas fritas', 350.00, 100, 'https://media.istockphoto.com/photos/bunch-of-fried-french-fries-on-a-white-background-closeup-picture-id1130991737?k=6&m=1130991737&s=170667a&w=0&h=sVUZHEplnr2Lzt1P409awJ6cUqKsHJPwodobhOF6kiM='),
+    ('Hamburguesa', 700.00, 50, 'https://th.bing.com/th/id/OIP.RRrZKc6uX4sKK7ofbFabhQHaEf?rs=1&pid=ImgDetMain'),
+    ('Pizza Margarita', 1000.00, 30, 'https://zenideen.com/wp-content/uploads/2020/06/pizza-mozzarella-tomaten-scaled.jpeg'),
+    ('Ensalada César', 600.00, 20, 'https://th.bing.com/th/id/OIP.xKBJXVYTf7YE9vU-jIHZPwHaE8?rs=1&pid=ImgDetMain'),
+    ('Refresco', 200.00, 150, 'https://res.cloudinary.com/walmart-labs/image/upload/w_960,dpr_auto,f_auto,q_auto:best/gr/images/product-images/img_large/00750103131164L.jpg'),
+    ('Carne de Res', 1200.00, 40, 'https://th.bing.com/th/id/OIP.FW_1Z5ZQ3Su0KU82BZD4iwHaER?rs=1&pid=ImgDetMain'),
+    ('Pechuga de Pollo', 900.00, 60, 'https://th.bing.com/th/id/OIP.sa9AuTTEMGvan5I0XVFuwQHaE8?rs=1&pid=ImgDetMain'),
+    ('Tarta de Jamón y Queso', 800.00, 25, 'https://th.bing.com/th/id/OIP.xIHcCZ0nWxITbZhX63700wHaD8?rs=1&pid=ImgDetMain'),
+    ('Cerveza Artesanal', 350.00, 70, 'https://th.bing.com/th/id/OIP.cm7k8KVwQDuFE8l_t-N7PQHaE8?rs=1&pid=ImgDetMain'),
+    ('Vino Malbec', 1200.00, 35, 'https://th.bing.com/th/id/OIP.qr01NA164aiZzfnOh8pXHQHaIa?rs=1&pid=ImgDetMain');
 GO
 
 INSERT INTO Usuarios (Nombre, Apellido, Imagen, Contraseña, IdRol, Correo, DNI)

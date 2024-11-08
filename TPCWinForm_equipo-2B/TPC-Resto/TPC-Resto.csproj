@@ -131,6 +131,7 @@
     <Content Include="Content\Styles\MainMenu.css" />
     <Content Include="Content\Styles\Perfil.css" />
     <Content Include="Content\Styles\Registro.css" />
+    <Content Include="Content\Styles\Stock.css" />
     <Content Include="Content\Styles\salon.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
@@ -141,6 +142,7 @@
     <Content Include="Perfil.aspx" />
     <Content Include="Registro.aspx" />
     <Content Include="Salon.aspx" />
+    <Content Include="Script_JS\Stock.js" />
     <Content Include="Script_JS\Modal.js" />
     <Content Include="Site.Master" />
     <Content Include="ViewSwitcher.ascx" />

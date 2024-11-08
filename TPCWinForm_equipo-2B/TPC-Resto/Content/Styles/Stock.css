@@ -1,0 +1,49 @@
+﻿/* Contenedor del carrusel centrado */
+.carousel-centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 600px;
+    height: 400px;
+    border: 1px solid #ccc;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+/* Estilo para las imágenes dentro del carrusel */
+.carousel-item img {
+    width: 100%;
+    height: auto;
+    max-height: 300px; /* Ajuste máximo para que se vea completa dentro del contenedor */
+    object-fit: cover; /* Recorta la imagen para cubrir el área del contenedor */
+    border-bottom: 1px solid #ccc;
+}
+
+/* Estilo para los textos del carrusel */
+.carousel-caption {
+    background-color: #fff;
+    padding: 10px;
+    color: #000;
+    text-align: center;
+    font-weight: bold;
+}
+
+    /* Estilo para el nombre y la cantidad de stock */
+    .carousel-caption h5,
+    .carousel-caption p {
+        color: #000; /* Color negro para mejor visibilidad */
+    }
+
+/* Estilo para los botones de navegación */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: invert(0) brightness(0); /* Color negro para el ícono */
+    background-color: #000; /* Fondo negro para el ícono */
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+}
