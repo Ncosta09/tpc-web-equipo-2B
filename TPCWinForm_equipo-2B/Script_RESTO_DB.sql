@@ -150,6 +150,10 @@ GO
 
 ALTER TABLE DetallePedidos
 ADD PrecioUnitario DECIMAL(10, 2) NOT NULL,
-    PrecioTotal DECIMAL(10, 2) NOT NULL;
+    PrecioTotal DECIMAL(10, 2) NOT NULL,
 GO
 
+ALTER TABLE Pedidos
+ADD 
+	PrecioTotalMesa DECIMAL(10, 2) NOT NULL;
+GO

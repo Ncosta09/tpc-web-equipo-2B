@@ -51,6 +51,58 @@ namespace Negocio
             }
         }
 
+        public void RegistarTotal(decimal PrecioTotalMesa, int idPedido)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setConsulta("UPDATE Pedidos SET PrecioTotalMesa = @PrecioTotalMesa where IDPedido = @idPedido;");
+                datos.setParametro("@PrecioTotalMesa", PrecioTotalMesa);
+                datos.setParametro("@idPedido", idPedido);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public List<decimal> BuscarTotal(int idPedido)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            List<decimal> totales = new List<decimal>();
+            try
+            {
+                datos.setConsulta("SELECT PrecioTotal FROM DetallePedidos where idPedido = @idPedido;");
+                datos.setParametro("@idPedido", idPedido);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+
+                    if (datos.Lector["PrecioTotal"] != DBNull.Value)
+                    {
+                        totales.Add(Convert.ToDecimal(datos.Lector["PrecioTotal"]));
+                    }
+                }
+
+                return totales;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+
         public void RegistrarDetallePedido(int idPedido, int idInsumo, int cantidad, decimal precioUnitario, decimal precioTotal)
         {
             AccesoDatos datos = new AccesoDatos();

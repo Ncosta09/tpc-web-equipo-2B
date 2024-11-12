@@ -124,6 +124,13 @@ namespace TPC_Resto
 
             if (!string.IsNullOrEmpty(numeroMesaStr) && int.TryParse(numeroMesaStr, out int numeroMesa))
             {
+
+                //Traigo la lista con los totales de la mesa(db)
+                List<decimal> totalesPedido = pedidosSalon.BuscarTotal(idPedidoActivo);
+                //Sumo los totales para calcular el total de la mesa(db)
+                decimal sumaTotales = totalesPedido.Sum();
+                //Registro el total del pedido(db)
+                pedidosSalon.RegistarTotal(sumaTotales, idPedidoActivo);
                 //Cerrar pedido(db)
                 pedidosSalon.CerrarPedido(idPedidoActivo);
                 //Borro mesero de la mesa (db)
