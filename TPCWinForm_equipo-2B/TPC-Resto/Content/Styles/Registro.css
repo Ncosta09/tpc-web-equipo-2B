@@ -46,6 +46,6 @@
     cursor: pointer;
 }
 
-    .form-button:hover {
-        background-color: #888;
-    }
+.form-button:hover {
+    background-color: #888;
+}

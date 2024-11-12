@@ -144,6 +144,7 @@
     <Content Include="Salon.aspx" />
     <Content Include="Script_JS\Stock.js" />
     <Content Include="Script_JS\Modal.js" />
+    <Content Include="Script_JS\ValidacionUsuario.js" />
     <Content Include="Site.Master" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />

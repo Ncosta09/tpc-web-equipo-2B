@@ -27,6 +27,7 @@ namespace TPC_Resto
                 nuevo.Apellido = txtApellido.Text;
                 nuevo.Dni = txtDni.Text;
                 nuevo.Email = txtEmail.Text;
+                nuevo.Imagen = txtImagen.Text;
                 nuevo.Contrasenia = txtContrasenia.Text;
 
                 negocio.registroUsuario(nuevo);

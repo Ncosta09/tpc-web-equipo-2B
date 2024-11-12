@@ -15,12 +15,13 @@ namespace Negocio
 
             try
             {
-                datos.setConsulta("INSERT INTO Usuarios (Nombre, Apellido, Contraseña, Correo, DNI, IdRol) VALUES (@Nombre, @Apellido, @Contrasenia, @Correo, @DNI, 2);");
+                datos.setConsulta("INSERT INTO Usuarios (Nombre, Apellido, Contraseña, Correo, Imagen, DNI, IdRol) VALUES (@Nombre, @Apellido, @Contrasenia, @Correo, @Imagen, @DNI, 2);");
 
                 datos.setParametro("@Nombre", nuevo.Nombre);
                 datos.setParametro("@Apellido", nuevo.Apellido);
                 datos.setParametro("@Contrasenia", nuevo.Contrasenia);
                 datos.setParametro("@Correo", nuevo.Email);
+                datos.setParametro("@Imagen", nuevo.Imagen);
                 datos.setParametro("@DNI", nuevo.Dni);
 
                 datos.ejecutarAccion();

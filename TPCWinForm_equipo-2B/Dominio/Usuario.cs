@@ -16,11 +16,7 @@ namespace Dominio
         public string Contrasenia { get; set; }
         public string Imagen { get; set; }
         public Rol Rol { get; set; }
-        //public Usuario(string email, string contrasenia)
-        //{
-        //    Email = email;
-        //    Contrasenia = contrasenia;
-        //}
+
     }
 
 }
