@@ -32,12 +32,6 @@ namespace TPC_Resto
                 listarMesas();
             }
 
-
-            if (Session["NumeroMesa"] != null)
-            {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "showCard", "document.querySelector('.card').style.display = 'flex';", true);
-            }
-
         }
         protected void Mesa_Click(object sender, EventArgs e)
         {
@@ -137,7 +131,6 @@ namespace TPC_Resto
                 meseroMesa.DeleteMeseroMesa(idUsuario, numeroMesa);
                 //Actualizar estado de la mesa a 0 desocupada (db)
                 mesasSalon.ActualizarEstadoMesaCero(numeroMesa);
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "closeCard", "document.querySelector('.card').style.display = 'none';", true);
                 listarMesas();
             }
         }
@@ -154,6 +147,7 @@ namespace TPC_Resto
             ddlInsumos.Items.Insert(0, new ListItem("Selecciona un insumo", "0"));
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "showModalInsumo", "showModalInsumo();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "showCard", "document.querySelector('.card').style.display = 'flex';", true);
         }
 
         protected void Insumos_Click(object sender, EventArgs e)
@@ -192,6 +186,7 @@ namespace TPC_Resto
                 ddlInsumos.SelectedIndex = 0;
                 txtCantidad.Text = "";
             }
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "showCard", "document.querySelector('.card').style.display = 'flex';", true);
         }
 
         private void ActualizarGridInsumos(int numeroMesa)
