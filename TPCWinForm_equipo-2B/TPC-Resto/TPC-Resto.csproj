@@ -136,6 +136,7 @@
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="HomeMenu.aspx" />
+    <Content Include="IngreseNuevoProducto.aspx" />
     <Content Include="obj\Debug\TPC-Resto.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\TPC-Resto.dll" />
     <Content Include="obj\Debug\TPC-Resto.pdb" />
@@ -178,6 +179,13 @@
     </Compile>
     <Compile Include="HomeMenu.aspx.designer.cs">
       <DependentUpon>HomeMenu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="IngreseNuevoProducto.aspx.cs">
+      <DependentUpon>IngreseNuevoProducto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="IngreseNuevoProducto.aspx.designer.cs">
+      <DependentUpon>IngreseNuevoProducto.aspx</DependentUpon>
     </Compile>
     <Compile Include="obj\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
     <Compile Include="Perfil.aspx.cs">

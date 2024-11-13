@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using Negocio;
+using Dominio;
 
 namespace TPC_Resto
 {
     public partial class Ventas : System.Web.UI.Page
     {
+        private int pageIndex = 0;  // Página actual
+        private int pageSize = 2;   // Número de registros por página
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Seguridad.sesionIniciada(Session["usuario"]))
@@ -31,20 +35,24 @@ namespace TPC_Resto
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                // Consulta SQL para obtener las ventas por mesa
+                // Consulta SQL para obtener las ventas por mesa con paginación
                 string consulta = @"SELECT M.NumeroMesa, SUM(V.Total) AS Total
                                     FROM Ventas V
                                     INNER JOIN Mesas M ON V.IdMesa = M.IdMesa
-                                    GROUP BY M.NumeroMesa";
+                                    GROUP BY M.NumeroMesa
+                                    ORDER BY M.NumeroMesa
+                                    OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
 
+                // Parámetros de paginación
                 datos.setConsulta(consulta);
+                datos.setParametro("@Offset", pageIndex * pageSize);  // Calcular el offset según la página actual
+                datos.setParametro("@PageSize", pageSize);
                 datos.ejecutarLectura();
 
                 var listaVentas = new List<Venta>();
 
                 while (datos.Lector.Read())
                 {
-                    // Crear objeto Venta con el detalle por mesa
                     Venta venta = new Venta();
                     venta.NumeroMesa = (int)datos.Lector["NumeroMesa"];
                     venta.Total = (decimal)datos.Lector["Total"];
@@ -57,7 +65,6 @@ namespace TPC_Resto
             }
             catch (Exception ex)
             {
-                // Manejo de errores
                 Response.Write("<script>alert('Error al cargar ventas: " + ex.Message + "');</script>");
             }
             finally
@@ -66,18 +73,18 @@ namespace TPC_Resto
             }
         }
 
+        // Función optimizada para obtener el detalle de la venta
         private List<DetalleVenta> ObtenerDetalleVenta(int numeroMesa)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                // Consulta SQL para obtener el detalle de cada venta por mesa
-                string consulta = @"SELECT P.Nombre AS Producto, DV.Cantidad, DV.PrecioUnitario, (DV.Cantidad * DV.PrecioUnitario) AS TotalItem
-                                    FROM DetalleVentas DV
-                                    INNER JOIN Productos P ON DV.IdProducto = P.IdProducto
-                                    INNER JOIN Ventas V ON DV.IdVenta = V.IdVenta
-                                    INNER JOIN Mesas M ON V.IdMesa = M.IdMesa
-                                    WHERE M.NumeroMesa = @NumeroMesa";
+                string consulta = @"SELECT IP.Nombre AS Producto, DP.Cantidad, DP.PrecioUnitario, 
+                                   (DP.Cantidad * DP.PrecioUnitario) AS TotalItem
+                                   FROM DetallePedidos DP
+                                   INNER JOIN Pedidos P ON DP.IdPedido = P.IDPedido
+                                   INNER JOIN Insumos IP ON DP.IdInsumo = IP.IdInsumo
+                                   WHERE P.IdMesa = (SELECT IdMesa FROM Mesas WHERE NumeroMesa = @NumeroMesa)";
 
                 datos.setConsulta(consulta);
                 datos.setParametro("@NumeroMesa", numeroMesa);
@@ -101,7 +108,7 @@ namespace TPC_Resto
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new ApplicationException("Error al obtener el detalle de la venta", ex);
             }
             finally
             {
@@ -109,21 +116,21 @@ namespace TPC_Resto
             }
         }
 
-        // Clases para modelar los datos de ventas y detalles
-        public class Venta
+        // Lógica para avanzar a la siguiente página
+        protected void btnNext_Click(object sender, EventArgs e)
         {
-            public int NumeroMesa { get; set; }
-            public decimal Total { get; set; }
-            public List<DetalleVenta> DetalleVenta { get; set; }
+            pageIndex++;
+            CargarVentas();
         }
 
-        public class DetalleVenta
+        // Lógica para retroceder a la página anterior
+        protected void btnPrev_Click(object sender, EventArgs e)
         {
-            public string Producto { get; set; }
-            public int Cantidad { get; set; }
-            public decimal PrecioUnitario { get; set; }
-            public decimal TotalItem { get; set; }
+            if (pageIndex > 0)
+            {
+                pageIndex--;
+                CargarVentas();
+            }
         }
     }
 }
-

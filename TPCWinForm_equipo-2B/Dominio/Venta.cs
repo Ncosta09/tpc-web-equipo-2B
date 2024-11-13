@@ -11,5 +11,8 @@ namespace Dominio
         public int NumeroMesa { get; set; }
         public decimal Total { get; set; }
         public List<DetalleVenta> DetalleVenta { get; set; }
+
+        public int PageIndex { get; set; }
+        public int TotalPages { get; set; }
     }
 }

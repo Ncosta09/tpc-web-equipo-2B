@@ -1,8 +1,13 @@
 ﻿<%@ Page Title="Ventas" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeBehind="Ventas.aspx.cs" Inherits="TPC_Resto.Ventas" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+   
     <div class="container mt-5">
         <h2 class="text-center mb-4">Ventas Totales por Mesa</h2>
+        
         <asp:Repeater ID="rptVentas" runat="server">
             <ItemTemplate>
                 <div class="card mb-4">
@@ -36,5 +41,12 @@
                 </div>
             </ItemTemplate>
         </asp:Repeater>
+
+        <!-- Controles de paginación -->
+        <div class="pagination mt-4">
+            <asp:Button ID="btnPrev" runat="server" Text="Anterior" OnClick="btnPrev_Click" CssClass="btn btn-primary" />
+            <asp:Button ID="btnNext" runat="server" Text="Siguiente" OnClick="btnNext_Click" CssClass="btn btn-primary" />
+        </div>
+
     </div>
 </asp:Content>
