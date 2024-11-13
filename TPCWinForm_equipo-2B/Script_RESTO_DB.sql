@@ -81,6 +81,14 @@ CREATE TABLE DetallePedidos (
 );
 GO
 
+CREATE TABLE Ventas (
+    IdVenta INT PRIMARY KEY IDENTITY(1,1),
+    IdMesa SMALLINT NOT NULL,
+    Fecha DATETIME NOT NULL,
+    Total DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (IdMesa) REFERENCES Mesas(IdMesa)
+);
+
 INSERT INTO Roles (Descripcion) 
 VALUES 
 ('Cliente'),
@@ -142,6 +150,41 @@ VALUES
 ('Javier', 'Torres', 'https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58498.jpg', '1234abcd', 2, 'javier@mail.com', '23456789');
 GO
 
+-- Insertar datos en la tabla Ventas
+INSERT INTO Ventas (IdMesa, Fecha, Total)
+VALUES 
+    (1, '2024-11-01', 1500.00),
+    (2, '2024-11-01', 1200.00),
+    (3, '2024-11-02', 900.00),
+    (4, '2024-11-02', 1100.00),
+    (5, '2024-11-03', 1300.00),
+    (6, '2024-11-03', 1800.00);
+GO
+
+-- Insertar datos en la tabla Pedidos
+INSERT INTO Pedidos (IdMesa, IdUsuario, Estado, FechaInicio, FechaCierre, PrecioTotalMesa)
+VALUES 
+    (1, 2, 1, '2024-11-01 12:00', '2024-11-01 12:45', 1500.00),
+    (2, 3, 1, '2024-11-01 13:00', '2024-11-01 13:40', 1200.00),
+    (3, 2, 1, '2024-11-02 14:00', '2024-11-02 14:50', 900.00),
+    (4, 4, 1, '2024-11-02 15:00', '2024-11-02 15:30', 1100.00),
+    (5, 5, 1, '2024-11-03 16:00', '2024-11-03 16:45', 1300.00),
+    (6, 2, 1, '2024-11-03 17:00', '2024-11-03 17:50', 1800.00);
+GO
+
+-- Insertar datos en la tabla DetallePedidos
+INSERT INTO DetallePedidos (IdPedido, IdInsumo, Cantidad, PrecioUnitario, PrecioTotal)
+VALUES 
+    (1, 1, 2, 350.00, 700.00), -- Pedido 1: 2 Papas Fritas
+    (1, 2, 1, 700.00, 700.00), -- Pedido 1: 1 Hamburguesa
+    (2, 3, 1, 1000.00, 1000.00), -- Pedido 2: 1 Pizza Margarita
+    (2, 5, 1, 200.00, 200.00), -- Pedido 2: 1 Refresco
+    (3, 4, 1, 600.00, 600.00), -- Pedido 3: 1 Ensalada César
+    (3, 9, 2, 350.00, 700.00), -- Pedido 3: 2 Cervezas Artesanales
+    (4, 6, 1, 1200.00, 1200.00), -- Pedido 4: 1 Carne de Res
+    (5, 8, 2, 400.00, 800.00), -- Pedido 5: 2 Tartas de Jamón y Queso
+    (6, 10, 1, 1200.00, 1200.00); -- Pedido 6: 1 Vino Malbec
+GO
 
 ALTER TABLE Mesas
 ADD Estado BIT NOT NULL DEFAULT 0;
@@ -150,7 +193,7 @@ GO
 
 ALTER TABLE DetallePedidos
 ADD PrecioUnitario DECIMAL(10, 2) NOT NULL,
-    PrecioTotal DECIMAL(10, 2) NOT NULL,
+    PrecioTotal DECIMAL(10, 2) NOT NULL
 GO
 
 ALTER TABLE Pedidos
