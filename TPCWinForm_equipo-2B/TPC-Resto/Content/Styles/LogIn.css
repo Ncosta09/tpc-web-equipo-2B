@@ -47,11 +47,16 @@
     cursor: pointer;
 }
 
-    .login-button:hover {
-        background-color: #888; /* Color al pasar el ratón sobre el botón en gris más claro */
-    }
+.login-button:hover {
+    background-color: #888; /* Color al pasar el ratón sobre el botón en gris más claro */
+}
 
 .register-link {
     text-align: center;
     color: #666; /* Color del enlace en gris */
+}
+
+.error-message{
+    color: red;
+    font-size: 12px;
 }

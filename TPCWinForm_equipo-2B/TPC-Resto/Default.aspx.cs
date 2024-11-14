@@ -31,6 +31,10 @@ namespace TPC_Resto
                     Session.Add("usuario", usuario);
                     Response.Redirect("HomeMenu.aspx");
                 }
+                else
+                {
+                    lblErrorMessage.Visible = true;
+                }
 
             }
             catch (Exception ex)

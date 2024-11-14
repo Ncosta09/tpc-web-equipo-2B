@@ -13,7 +13,10 @@
                 <div class="form-group">
                     <label class="form-label" for="txtContrasenia">Contraseña:</label>
                     <asp:TextBox ID="txtContrasenia" runat="server" TextMode="Password" placeholder="Contraseña" CssClass="form-input" />
+                    
+                    <asp:Label ID="lblErrorMessage" runat="server" Text="Correo o contraseña incorrectos." CssClass="error-message" Visible="false"></asp:Label>
                 </div>
+
 
                 <asp:Button ID="btnLogin" runat="server" Text="Ingresa" CssClass="login-button" OnClick="btnLogin_Click" />
 
