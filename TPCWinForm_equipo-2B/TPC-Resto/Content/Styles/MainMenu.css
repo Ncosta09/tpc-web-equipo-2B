@@ -48,17 +48,26 @@
     background-color: #666;
 }
 
-.salon:hover {
-    background-color: #555;
-}
+    .salon:hover {
+        background-color: #555;
+    }
 
 .administracion {
-    background-color: #444;
+    background-color: #666;
 }
 
-.administracion:hover {
-    background-color: #333;
+    .administracion:hover {
+        background-color: #555;
+    }
+
+.reporte {
+    background-color: #666;
 }
+
+    .reporte:hover {
+        background-color: #555;
+    }
+
 
 .right-side::before {
     content: '';
@@ -75,4 +84,12 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.NoReporte, .NoAdministracion {
+    background-color: #ccc; /* Color de fondo para indicar que está inactivo */
+    color: #888; /* Color de texto más claro */
+    cursor: not-allowed; /* Cursor para indicar que no es clickeable */
+    pointer-events: none; /* Evita que se haga clic en el botón */
+    opacity: 0.6; /* Transparencia para darle un efecto inactivo */
 }

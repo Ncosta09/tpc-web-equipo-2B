@@ -35,7 +35,7 @@
 
         <nav>
             <div>
-                <h1>Admin Resto</h1>
+                <h1><a runat="server" href="~/HomeMenu.aspx">Admin Resto</a></h1>
             </div>
             <ul>
                 <%if (!Negocio.Seguridad.sesionIniciada(Session["usuario"]))
