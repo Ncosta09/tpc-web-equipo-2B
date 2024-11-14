@@ -1,18 +1,19 @@
 ﻿<%@ Page Title="Ventas" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeBehind="Ventas.aspx.cs" Inherits="TPC_Resto.Ventas" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
-   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
    
     <div class="container mt-5">
-        <h2 class="text-center mb-4">Ventas Totales por Mesa</h2>
+        <h2 class="text-center mb-4">Ventas Totales por Pedido</h2>
         
         <asp:Repeater ID="rptVentas" runat="server">
             <ItemTemplate>
                 <div class="card mb-4">
                     <div class="card-header">
-                        <h4>Mesa <%# Eval("NumeroMesa") %> - Total: $<%# Eval("Total") %></h4>
+                        <h4>Pedido <%# Eval("ID") %> - Total: $<%# Eval("PrecioTotalMesa") %></h4>
+                        <p>Mesa <%# Eval("Mesa.NumeroMesa") %> - Fecha: <%# Eval("FechaInicio", "{0:dd/MM/yyyy}") %></p>
                     </div>
                     <div class="card-body">
                         <table class="table table-striped">

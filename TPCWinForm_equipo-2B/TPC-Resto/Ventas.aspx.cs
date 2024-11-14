@@ -1,71 +1,79 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using Negocio;
 using Dominio;
+using Negocio;
 
 namespace TPC_Resto
 {
     public partial class Ventas : System.Web.UI.Page
     {
-        private int pageIndex = 0;  // Página actual
-        private int pageSize = 2;   // Número de registros por página
-
-        protected void Page_Load(object sender, EventArgs e)
+        public List<Pedido> ListaPedidos { get; set; }
+        private int currentPage
         {
-            if (!Seguridad.sesionIniciada(Session["usuario"]))
+            get
             {
-                Response.Redirect("Default.aspx", false);
+                return ViewState["currentPage"] != null ? (int)ViewState["currentPage"] : 1;
             }
-
-            if (!Seguridad.esAdmin(Session["usuario"]))
+            set
             {
-                Response.Redirect("HomeMenu.aspx", false);
-            }
-
-            if (!IsPostBack)
-            {
-                CargarVentas();
+                ViewState["currentPage"] = value;
             }
         }
 
-        private void CargarVentas()
+        // Tamaño de la página (solo 1 pedido por página)
+        private int pageSize = 1;
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                CargarPedidos();
+            }
+        }
+
+        private void CargarPedidos()
         {
             AccesoDatos datos = new AccesoDatos();
+            ListaPedidos = new List<Pedido>();
+
             try
             {
-                // Consulta SQL para obtener las ventas por mesa con paginación
-                string consulta = @"SELECT M.NumeroMesa, SUM(V.Total) AS Total
-                                    FROM Ventas V
-                                    INNER JOIN Mesas M ON V.IdMesa = M.IdMesa
-                                    GROUP BY M.NumeroMesa
-                                    ORDER BY M.NumeroMesa
-                                    OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
+                // Modificación de la consulta para traer solo un pedido por página
+                datos.setConsulta(@"
+                    SELECT P.IDPedido, M.NumeroMesa, P.FechaInicio, P.PrecioTotalMesa
+                    FROM Pedidos AS P
+                    INNER JOIN Mesas AS M ON P.IdMesa = M.IdMesa
+                    WHERE P.Estado = 1
+                    ORDER BY P.FechaInicio
+                    OFFSET @skip ROWS FETCH NEXT @pageSize ROWS ONLY");
 
-                // Parámetros de paginación
-                datos.setConsulta(consulta);
-                datos.setParametro("@Offset", pageIndex * pageSize);  // Calcular el offset según la página actual
-                datos.setParametro("@PageSize", pageSize);
+                datos.setParametro("@skip", (currentPage - 1) * pageSize);
+                datos.setParametro("@pageSize", pageSize);
+
                 datos.ejecutarLectura();
-
-                var listaVentas = new List<Venta>();
-
                 while (datos.Lector.Read())
                 {
-                    Venta venta = new Venta();
-                    venta.NumeroMesa = (int)datos.Lector["NumeroMesa"];
-                    venta.Total = (decimal)datos.Lector["Total"];
-                    venta.DetalleVenta = ObtenerDetalleVenta(venta.NumeroMesa);
-                    listaVentas.Add(venta);
+                    Pedido pedido = new Pedido
+                    {
+                        ID = (int)datos.Lector["IDPedido"],
+                        Mesa = new Mesa
+                        {
+                            NumeroMesa = (int)datos.Lector["NumeroMesa"]
+                        },
+                        FechaInicio = (DateTime)datos.Lector["FechaInicio"],
+                        PrecioTotalMesa = (decimal)datos.Lector["PrecioTotalMesa"],
+                        DetalleVenta = ObtenerDetallePedido((int)datos.Lector["IDPedido"])
+                    };
+                    ListaPedidos.Add(pedido);
                 }
 
-                rptVentas.DataSource = listaVentas;
+                rptVentas.DataSource = ListaPedidos;
                 rptVentas.DataBind();
             }
             catch (Exception ex)
             {
-                Response.Write("<script>alert('Error al cargar ventas: " + ex.Message + "');</script>");
+                // Manejo de errores
+                Response.Write("Error: " + ex.Message);
             }
             finally
             {
@@ -73,64 +81,60 @@ namespace TPC_Resto
             }
         }
 
-        // Función optimizada para obtener el detalle de la venta
-        private List<DetalleVenta> ObtenerDetalleVenta(int numeroMesa)
+        private List<DetalleVenta> ObtenerDetallePedido(int idPedido)
         {
             AccesoDatos datos = new AccesoDatos();
+            List<DetalleVenta> detalles = new List<DetalleVenta>();
+
             try
             {
-                string consulta = @"SELECT IP.Nombre AS Producto, DP.Cantidad, DP.PrecioUnitario, 
-                                   (DP.Cantidad * DP.PrecioUnitario) AS TotalItem
-                                   FROM DetallePedidos DP
-                                   INNER JOIN Pedidos P ON DP.IdPedido = P.IDPedido
-                                   INNER JOIN Insumos IP ON DP.IdInsumo = IP.IdInsumo
-                                   WHERE P.IdMesa = (SELECT IdMesa FROM Mesas WHERE NumeroMesa = @NumeroMesa)";
+                datos.setConsulta(@"
+                    SELECT I.Nombre AS Producto, DP.Cantidad, DP.PrecioUnitario, DP.PrecioTotal
+                    FROM DetallePedidos AS DP
+                    INNER JOIN Insumos AS I ON DP.IdInsumo = I.IdInsumo
+                    WHERE DP.IdPedido = @IdPedido");
+                datos.setParametro("@IdPedido", idPedido);
 
-                datos.setConsulta(consulta);
-                datos.setParametro("@NumeroMesa", numeroMesa);
                 datos.ejecutarLectura();
-
-                var detalleList = new List<DetalleVenta>();
-
                 while (datos.Lector.Read())
                 {
                     DetalleVenta detalle = new DetalleVenta
                     {
-                        Producto = datos.Lector["Producto"].ToString(),
+                        Producto = (string)datos.Lector["Producto"],
                         Cantidad = (int)datos.Lector["Cantidad"],
                         PrecioUnitario = (decimal)datos.Lector["PrecioUnitario"],
-                        TotalItem = (decimal)datos.Lector["TotalItem"]
+                        TotalItem = (decimal)datos.Lector["PrecioTotal"]
                     };
-                    detalleList.Add(detalle);
+                    detalles.Add(detalle);
                 }
-
-                return detalleList;
             }
             catch (Exception ex)
             {
-                throw new ApplicationException("Error al obtener el detalle de la venta", ex);
+                Response.Write("Error: " + ex.Message);
             }
             finally
             {
                 datos.cerrarConexion();
             }
+
+            return detalles;
         }
 
-        // Lógica para avanzar a la siguiente página
-        protected void btnNext_Click(object sender, EventArgs e)
-        {
-            pageIndex++;
-            CargarVentas();
-        }
-
-        // Lógica para retroceder a la página anterior
+        // Evento para el botón "Anterior"
         protected void btnPrev_Click(object sender, EventArgs e)
         {
-            if (pageIndex > 0)
+            if (currentPage > 1)
             {
-                pageIndex--;
-                CargarVentas();
+                currentPage--;
+                CargarPedidos();
             }
+        }
+
+        // Evento para el botón "Siguiente"
+        protected void btnNext_Click(object sender, EventArgs e)
+        {
+            currentPage++;
+            CargarPedidos();
         }
     }
 }

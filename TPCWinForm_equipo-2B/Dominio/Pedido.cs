@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Dominio
 {
@@ -14,5 +11,11 @@ namespace Dominio
         public DateTime FechaCierre { get; set; }
         public Mesa Mesa { get; set; }
         public Usuario Usuario { get; set; }
+
+        // Nueva propiedad para el precio total del pedido
+        public decimal PrecioTotalMesa { get; set; }
+
+        // Nueva propiedad para almacenar los detalles de la venta
+        public List<DetalleVenta> DetalleVenta { get; set; }
     }
 }

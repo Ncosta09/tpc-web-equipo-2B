@@ -81,13 +81,6 @@ CREATE TABLE DetallePedidos (
 );
 GO
 
-CREATE TABLE Ventas (
-    IdVenta INT PRIMARY KEY IDENTITY(1,1),
-    IdMesa SMALLINT NOT NULL,
-    Fecha DATETIME NOT NULL,
-    Total DECIMAL(10, 2) NOT NULL,
-    FOREIGN KEY (IdMesa) REFERENCES Mesas(IdMesa)
-);
 
 INSERT INTO Roles (Descripcion) 
 VALUES 
@@ -150,15 +143,20 @@ VALUES
 ('Javier', 'Torres', 'https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58498.jpg', '1234abcd', 2, 'javier@mail.com', '23456789');
 GO
 
--- Insertar datos en la tabla Ventas
-INSERT INTO Ventas (IdMesa, Fecha, Total)
-VALUES 
-    (1, '2024-11-01', 1500.00),
-    (2, '2024-11-01', 1200.00),
-    (3, '2024-11-02', 900.00),
-    (4, '2024-11-02', 1100.00),
-    (5, '2024-11-03', 1300.00),
-    (6, '2024-11-03', 1800.00);
+
+ALTER TABLE Mesas
+ADD Estado BIT NOT NULL DEFAULT 0;
+GO
+
+
+ALTER TABLE DetallePedidos
+ADD PrecioUnitario DECIMAL(10, 2) NOT NULL,
+    PrecioTotal DECIMAL(10, 2) NOT NULL
+GO
+
+ALTER TABLE Pedidos
+ADD 
+	PrecioTotalMesa DECIMAL(10, 2);
 GO
 
 -- Insertar datos en la tabla Pedidos
@@ -184,19 +182,4 @@ VALUES
     (4, 6, 1, 1200.00, 1200.00), -- Pedido 4: 1 Carne de Res
     (5, 8, 2, 400.00, 800.00), -- Pedido 5: 2 Tartas de Jamón y Queso
     (6, 10, 1, 1200.00, 1200.00); -- Pedido 6: 1 Vino Malbec
-GO
-
-ALTER TABLE Mesas
-ADD Estado BIT NOT NULL DEFAULT 0;
-GO
-
-
-ALTER TABLE DetallePedidos
-ADD PrecioUnitario DECIMAL(10, 2) NOT NULL,
-    PrecioTotal DECIMAL(10, 2) NOT NULL
-GO
-
-ALTER TABLE Pedidos
-ADD 
-	PrecioTotalMesa DECIMAL(10, 2) NOT NULL;
 GO
