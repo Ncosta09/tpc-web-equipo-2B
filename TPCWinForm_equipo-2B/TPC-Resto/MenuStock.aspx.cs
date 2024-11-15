@@ -6,6 +6,13 @@ namespace TPC_Resto
 {
     public partial class MenuStock : System.Web.UI.Page
     {
+        private const int ProductosPorPagina = 8;
+        private int paginaActual
+        {
+            get { return (int)(ViewState["paginaActual"] ?? 1); }
+            set { ViewState["paginaActual"] = value; }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Seguridad.sesionIniciada(Session["usuario"]))
@@ -29,12 +36,19 @@ namespace TPC_Resto
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                string consulta = "SELECT Nombre, ImagenURL, Stock, Precio FROM Insumos";
+                // Configurar la consulta para paginacaoon
+                int offset = (paginaActual - 1) * ProductosPorPagina;
+                string consulta = $@"
+                    SELECT Nombre, ImagenURL, Stock, Precio
+                    FROM Insumos
+                    ORDER BY Nombre
+                    OFFSET {offset} ROWS
+                    FETCH NEXT {ProductosPorPagina} ROWS ONLY";
+
                 datos.setConsulta(consulta);
                 datos.ejecutarLectura();
 
-                carouselItems.InnerHtml = string.Empty; // Limpiar contenido anterior
-                bool firstItem = true;
+                insumosTableBody.InnerHtml = string.Empty;
 
                 while (datos.Lector.Read())
                 {
@@ -43,19 +57,16 @@ namespace TPC_Resto
                     var stock = datos.Lector["Stock"].ToString();
                     var precio = Convert.ToDecimal(datos.Lector["Precio"]).ToString("C2");
 
-                    string activeClass = firstItem ? "active" : "";
-                    firstItem = false;
-
-                    carouselItems.InnerHtml += $@"
-                        <div class='carousel-item {activeClass}'>
-                            <img src='{imagenUrl}' alt='{nombre}' class='d-block w-100'>
-                            <div class='carousel-caption'>
-                                <h5>{nombre}</h5>
-                                <p>Stock: {stock}</p>
-                                <p>Precio: {precio}</p>
-                            </div>
-                        </div>";
+                    insumosTableBody.InnerHtml += $@"
+                        <tr>
+                            <td><img src='{imagenUrl}' alt='{nombre}' style='width: 50px; height: 50px;'></td>
+                            <td>{nombre}</td>
+                            <td>{stock}</td>
+                            <td>{precio}</td>
+                        </tr>";
                 }
+
+                lblPaginaActual.Text = "Página " + paginaActual;
             }
             catch (Exception ex)
             {
@@ -70,6 +81,21 @@ namespace TPC_Resto
         protected void btnNuevoProducto_Click(object sender, EventArgs e)
         {
             Response.Redirect("IngreseNuevoProducto.aspx");
+        }
+
+        protected void btnAnterior_Click(object sender, EventArgs e)
+        {
+            if (paginaActual > 1)
+            {
+                paginaActual--;
+                CargarInsumos();
+            }
+        }
+
+        protected void btnSiguiente_Click(object sender, EventArgs e)
+        {
+            paginaActual++;
+            CargarInsumos();
         }
     }
 }

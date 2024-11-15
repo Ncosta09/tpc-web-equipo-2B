@@ -14,18 +14,28 @@
             <asp:Button ID="btnNuevoProducto" runat="server" CssClass="btn btn-primary" Text="Ingresar Nuevo Producto" OnClick="btnNuevoProducto_Click" />
         </div>
 
-        <!-- Carrusel de insumos con tamaño mejorado -->
-        <div id="carouselInsumos" class="carousel slide carousel-dark" data-ride="carousel">
-            <div class="carousel-inner" id="carouselItems" runat="server"></div>
+        <!-- Tabla de insumos con estilo oscuro -->
+        <div class="table-responsive">
+            <table class="table table-dark table-striped">
+                <thead>
+                    <tr>
+                        <th>Imagen</th>
+                        <th>Nombre</th>
+                        <th>Stock</th>
+                        <th>Precio</th>
+                    </tr>
+                </thead>
+                <tbody id="insumosTableBody" runat="server">
+                    <!-- Filas generadas dinámicamente desde el código detrás -->
+                </tbody>
+            </table>
+        </div>
 
-            <a class="carousel-control-prev" href="#carouselInsumos" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselInsumos" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
+        <!-- Controles de paginación -->
+        <div class="d-flex justify-content-between">
+            <asp:Button ID="btnAnterior" runat="server" CssClass="btn btn-secondary" Text="Anterior" OnClick="btnAnterior_Click" />
+            <asp:Label ID="lblPaginaActual" runat="server" CssClass="align-self-center"></asp:Label>
+            <asp:Button ID="btnSiguiente" runat="server" CssClass="btn btn-secondary" Text="Siguiente" OnClick="btnSiguiente_Click" />
         </div>
     </div>
 </asp:Content>
