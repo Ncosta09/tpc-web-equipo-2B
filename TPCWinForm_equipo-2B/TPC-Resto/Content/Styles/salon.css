@@ -157,3 +157,22 @@
 .ddlInsumos{
     width: 90%;
 }
+
+.gridInsumos {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .gridInsumos th, .gridInsumos td {
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+
+    .gridInsumos th {
+        background-color: #f2f2f2;
+    }
+
+    .gridInsumos td {
+        background-color: #fff;
+    }

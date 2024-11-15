@@ -152,13 +152,12 @@ namespace TPC_Resto
 
         protected void Insumos_Click(object sender, EventArgs e)
         {
-            if (ddlInsumos.SelectedValue != "0")
+            if (ddlInsumos.SelectedValue != "0" && int.TryParse(txtCantidad.Text, out int cantidad) && cantidad > 0)
             {
                 Insumos insumos = new Insumos();
                 List<Insumo> listaInsumos = insumos.listarInsumos();
 
                 string nombreInsumo = ddlInsumos.SelectedItem.Text;
-                int cantidad = int.Parse(txtCantidad.Text);
                 int insumoId = int.Parse(ddlInsumos.SelectedValue);
 
                 Insumo insumoSeleccionado = listaInsumos.FirstOrDefault(i => i.ID == insumoId);
@@ -186,8 +185,22 @@ namespace TPC_Resto
                 ddlInsumos.SelectedIndex = 0;
                 txtCantidad.Text = "";
             }
+            else
+            {
+                // Mostrar un mensaje de error con JavaScript si la cantidad no es válida
+                if (ddlInsumos.SelectedValue == "0")
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alertInsumo", "alert('Por favor, seleccione un insumo válido.');", true);
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alertCantidad", "alert('Por favor ingrese una cantidad válida mayor a 0.');", true);
+                }
+            }
+
             ScriptManager.RegisterStartupScript(this, this.GetType(), "showCard", "document.querySelector('.card').style.display = 'flex';", true);
         }
+
 
         private void ActualizarGridInsumos(int numeroMesa)
         {
