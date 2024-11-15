@@ -10,6 +10,26 @@ namespace Negocio
     public class PedidosSalon
     {
 
+        public void ModificarStock(int IdInsumo, int cantidad)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setConsulta("UPDATE Insumos SET Stock = (Stock - @cantidad) WHERE IdInsumo = @IdInsumo;;");
+                datos.setParametro("@IdInsumo", IdInsumo);
+                datos.setParametro("@cantidad", cantidad);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
         public void CerrarPedido(int idPedido)
         {
             AccesoDatos datos = new AccesoDatos();

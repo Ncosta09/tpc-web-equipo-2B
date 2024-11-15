@@ -175,12 +175,22 @@ namespace TPC_Resto
                 // Obtengo el pedido activo de la mesa
                 int idPedidoActivo = pedidosSalon.ObtenerPedidoActivoPorMesa(idMesa);
 
-                // Registro el detalle de ese pedido
-                pedidosSalon.RegistrarDetallePedido(idPedidoActivo, insumoId, cantidad, precioUnitario, precioTotal);
+                if (insumoSeleccionado.Stock < cantidad)
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alertStock", "alert('El stock es insuficiente.');", true);
+                    return;
+                }
+                else
+                {
+                    // Registro el detalle de ese pedido
+                    pedidosSalon.RegistrarDetallePedido(idPedidoActivo, insumoId, cantidad, precioUnitario, precioTotal);
 
-                // Actualizo el gridInsumos con el nuevo pedido y sus detalles
-                ActualizarGridInsumos(idMesa);
+                    // Actualizo el stock por detalle agregado
+                    pedidosSalon.ModificarStock(insumoId, cantidad);
 
+                    // Actualizo el gridInsumos con el nuevo pedido y sus detalles
+                    ActualizarGridInsumos(idMesa);
+                }
                 // Reseteo el dropdown de insumos
                 ddlInsumos.SelectedIndex = 0;
                 txtCantidad.Text = "";
