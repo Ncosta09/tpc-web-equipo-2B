@@ -15,6 +15,33 @@ namespace TPC_Resto
     {
 
         /// <summary>
+        /// btnDiario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDiario;
+
+        /// <summary>
+        /// btnMensual control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnMensual;
+
+        /// <summary>
+        /// btnAnual control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAnual;
+
+        /// <summary>
         /// ChartGanancias control.
         /// </summary>
         /// <remarks>

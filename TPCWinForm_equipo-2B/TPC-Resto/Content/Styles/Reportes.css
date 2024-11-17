@@ -31,4 +31,40 @@
 }
 
 .reports-dashboard {
+    height: 100%;
+    width: 85%;
+}
+
+.dashboard-one {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.buttonbox {
+    width: 40%;
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #dadada;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+.single-button {
+    padding: 4px 8px;
+    border: none;
+    background-color: transparent;
+}
+
+.single-button:hover {
+    background-color: #c5c5c5;
+    border-radius: 8px;
+}
+
+.single-button:active {
+    background-color: #bababa;
+    border-radius: 8px;
 }
