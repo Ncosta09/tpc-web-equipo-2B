@@ -50,6 +50,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.DataVisualization" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -131,6 +132,7 @@
     <Content Include="Content\Styles\MainMenu.css" />
     <Content Include="Content\Styles\Perfil.css" />
     <Content Include="Content\Styles\Registro.css" />
+    <Content Include="Content\Styles\Reportes.css" />
     <Content Include="Content\Styles\Stock.css" />
     <Content Include="Content\Styles\salon.css" />
     <Content Include="Default.aspx" />
