@@ -20,7 +20,6 @@ namespace TPC_Resto
             }
         }
 
-        // Tamaño de la página (solo 1 pedido por página)
         private int pageSize = 1;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -35,20 +34,41 @@ namespace TPC_Resto
         {
             AccesoDatos datos = new AccesoDatos();
             ListaPedidos = new List<Pedido>();
+            DateTime? fechaInicio = null;
+
+            // Si se selecciona una fecha la asigna al filtro
+            if (DateTime.TryParse(txtFechaInicio.Value, out DateTime fecha))
+            {
+                fechaInicio = fecha;
+            }
 
             try
             {
-                // Modificación de la consulta para traer solo un pedido por página
-                datos.setConsulta(@"
+                // filtro por fecha
+                string query = @"
                     SELECT P.IDPedido, M.NumeroMesa, P.FechaInicio, P.PrecioTotalMesa
                     FROM Pedidos AS P
                     INNER JOIN Mesas AS M ON P.IdMesa = M.IdMesa
-                    WHERE P.Estado = 1
-                    ORDER BY P.FechaInicio
-                    OFFSET @skip ROWS FETCH NEXT @pageSize ROWS ONLY");
+                    WHERE P.Estado = 1";
 
+                if (fechaInicio.HasValue)
+                {
+                    query += " AND P.FechaInicio >= @FechaInicio";
+                }
+
+                query += @"
+                    ORDER BY P.FechaInicio
+                    OFFSET @skip ROWS FETCH NEXT @pageSize ROWS ONLY";
+
+                
+                datos.setConsulta(query);
                 datos.setParametro("@skip", (currentPage - 1) * pageSize);
                 datos.setParametro("@pageSize", pageSize);
+
+                if (fechaInicio.HasValue)
+                {
+                    datos.setParametro("@FechaInicio", fechaInicio.Value);
+                }
 
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
@@ -69,10 +89,13 @@ namespace TPC_Resto
 
                 rptVentas.DataSource = ListaPedidos;
                 rptVentas.DataBind();
+
+                //habilitación de los botone
+                btnPrev.Enabled = currentPage > 1;
+                btnNext.Enabled = ListaPedidos.Count == pageSize;
             }
             catch (Exception ex)
             {
-                // Manejo de errores
                 Response.Write("Error: " + ex.Message);
             }
             finally
@@ -120,7 +143,13 @@ namespace TPC_Resto
             return detalles;
         }
 
-        // Evento para el botón "Anterior"
+        //filtro por fecha
+        protected void btnFiltrar_Click(object sender, EventArgs e)
+        {
+            currentPage = 1; // Reiniciar a la primera página al aplicar el filtro
+            CargarPedidos();
+        }
+
         protected void btnPrev_Click(object sender, EventArgs e)
         {
             if (currentPage > 1)
@@ -130,7 +159,6 @@ namespace TPC_Resto
             }
         }
 
-        // Evento para el botón "Siguiente"
         protected void btnNext_Click(object sender, EventArgs e)
         {
             currentPage++;
