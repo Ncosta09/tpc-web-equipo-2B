@@ -21,13 +21,14 @@
     <link href="Content/Styles/Administracion.css" rel="stylesheet" />
     <link href="Content/Styles/Perfil.css" rel="stylesheet" />
     <link href="~Content/Styles/Stock.css" rel="stylesheet" />
-    <link href="Content/Styles/Reportes.css" rel="stylesheet" />
+    <link href="~/Content/Styles/Reportes.css" rel="stylesheet" />
 
      <%--SCRIPT JAVASCRIPT--%>
     <script src="Script_JS/Modal.js"></script>
     <script src="~/Scripts/jquery.min.js"></script>
     <script src="~/Scripts/bootstrap.bundle.min.js"></script>
     <script src="Script_JS/ValidacionUsuario.js"></script>
+    <script src="Script_JS/CambioCuadro.js"></script>
 
     <title>Resto</title>
 </head>

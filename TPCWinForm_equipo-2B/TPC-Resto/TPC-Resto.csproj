@@ -148,6 +148,7 @@
     <Content Include="Registro.aspx" />
     <Content Include="Reporte.aspx" />
     <Content Include="Salon.aspx" />
+    <Content Include="Script_JS\CambioCuadro.js" />
     <Content Include="Script_JS\Stock.js" />
     <Content Include="Script_JS\Modal.js" />
     <Content Include="Script_JS\ValidacionUsuario.js" />

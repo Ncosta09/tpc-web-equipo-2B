@@ -14,19 +14,21 @@ namespace TPC_Resto
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Seguridad.sesionIniciada(Session["usuario"]))
-            {
-                Response.Redirect("Default.aspx", false);
-            }
+            //if (!Seguridad.sesionIniciada(Session["usuario"]))
+            //{
+            //    Response.Redirect("Default.aspx", false);
+            //}
 
-            if (!Seguridad.esAdmin(Session["usuario"]))
-            {
-                Response.Redirect("HomeMenu.aspx", false);
-            }
+            //if (!Seguridad.esAdmin(Session["usuario"]))
+            //{
+            //    Response.Redirect("HomeMenu.aspx", false);
+            //}
 
             if (!IsPostBack)
             {
                 CargarGrafico("diario");
+                CargarInsumoMasVendido();
+                CargarInsumoMenosVendido();
             }
         }
 
@@ -92,6 +94,32 @@ namespace TPC_Resto
                 default:    
                 break;
             }
+        }
+
+        private void CargarInsumoMasVendido()
+        {
+            DatosReportes reporteMas = new DatosReportes();
+            Insumo insumoMasVendido = reporteMas.productoMasVendido();
+
+            if (insumoMasVendido != null)
+            {
+                lblNombreMas.Text = insumoMasVendido.Nombre;
+                lblMasCantVendido.Text = insumoMasVendido.TotalVendido.ToString();
+            }
+
+        }
+
+        private void CargarInsumoMenosVendido()
+        {
+            DatosReportes reporteMenos = new DatosReportes();
+            Insumo insumoMenosVendido = reporteMenos.productoMenosVendido();
+
+            if (insumoMenosVendido != null)
+            {
+                lblNombreMenos.Text = insumoMenosVendido.Nombre;
+                lblMenosCantVendido.Text = insumoMenosVendido.TotalVendido.ToString();
+            }
+
         }
     }
 }
