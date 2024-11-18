@@ -13,13 +13,13 @@
         <div class="input-group mb-4">
             <asp:TextBox ID="txtBusqueda" runat="server" CssClass="form-control" placeholder="Buscar recetas..." />
             <div class="input-group-append">
-                <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-primary" Text="Buscar" OnClick="btnBuscar_Click" />
+                <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-dark" Text="Buscar" OnClick="btnBuscar_Click" />
             </div>
         </div>
 
         <!-- Botón para redirigir a la página de ingreso de nueva recet -->
         <div class="text-center mb-4">
-            <asp:Button ID="btnNuevoProducto" runat="server" CssClass="btn btn-primary" Text="Ingresar Nueva Receta" OnClick="btnNuevoProducto_Click" />
+            <asp:Button ID="btnNuevoProducto" runat="server" CssClass="btn btn-dark" Text="Ingresar Nueva Receta" OnClick="btnNuevoProducto_Click" />
         </div>
 
         <!-- Tabla de insumos con estilo oscuro -->
