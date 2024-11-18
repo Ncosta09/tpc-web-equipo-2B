@@ -9,27 +9,31 @@
     <div class="container mt-5">
         <h2 class="text-center mb-4">Recetas </h2>
 
-        <!-- Botón para redirigir a la página de ingreso de nuevo producto -->
+        <!-- Barra de búsqueda -->
+        <div class="input-group mb-4">
+            <asp:TextBox ID="txtBusqueda" runat="server" CssClass="form-control" placeholder="Buscar recetas..." />
+            <div class="input-group-append">
+                <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-primary" Text="Buscar" OnClick="btnBuscar_Click" />
+            </div>
+        </div>
+
+        <!-- Botón para redirigir a la página de ingreso de nueva recet -->
         <div class="text-center mb-4">
-            <asp:Button ID="btnNuevoProducto" runat="server" CssClass="btn btn-primary" Text="Ingresar Nuevo Producto" OnClick="btnNuevoProducto_Click" />
+            <asp:Button ID="btnNuevoProducto" runat="server" CssClass="btn btn-primary" Text="Ingresar Nueva Receta" OnClick="btnNuevoProducto_Click" />
         </div>
 
         <!-- Tabla de insumos con estilo oscuro -->
-        <div class="table-responsive">
-            <table class="table table-dark table-striped">
-                <thead>
-                    <tr>
-                        <th>Imagen</th>
-                        <th>Nombre</th>
-                        <th>Stock</th>
-                        <th>Precio</th>
-                    </tr>
-                </thead>
-                <tbody id="insumosTableBody" runat="server">
-                    <!-- Filas generadas dinámicamente desde el código detrás -->
-                </tbody>
-            </table>
-        </div>
+  <div class="table-responsive">
+    <asp:Table ID="insumosTable" runat="server" CssClass="table table-dark table-striped">
+        <asp:TableHeaderRow>
+            <asp:TableHeaderCell>Imagen</asp:TableHeaderCell>
+            <asp:TableHeaderCell>Nombre</asp:TableHeaderCell>
+            <asp:TableHeaderCell>Stock</asp:TableHeaderCell>
+            <asp:TableHeaderCell>Precio</asp:TableHeaderCell>
+            <asp:TableHeaderCell>Acción</asp:TableHeaderCell>
+        </asp:TableHeaderRow>
+    </asp:Table>
+</div>
 
         <!-- Controles de paginación -->
         <div class="d-flex justify-content-between">

@@ -11,8 +11,8 @@
                 <p>Elige una opción para gestionar el sistema:</p>
                 
                 <a href="MenuPersonas.aspx" class="btn btn-admin btn-admin-primary">Menú Personas</a>
-                <a href="MenuStock.aspx" class="btn btn-admin btn-admin-info">Menú Stock</a>
-                <a href="Ventas.aspx" class="btn btn-admin btn-admin-success">Ventas</a>
+                <a href="MenuStock.aspx" class="btn btn-admin btn-admin-info">Menú Recetas</a>
+                <a href="Ventas.aspx" class="btn btn-admin btn-admin-success">Menú Ventas</a>
             </div>
             <div class="admin-card-footer">
                 Gestión de Restaurante

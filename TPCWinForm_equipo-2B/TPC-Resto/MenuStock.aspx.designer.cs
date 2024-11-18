@@ -15,6 +15,24 @@ namespace TPC_Resto
     {
 
         /// <summary>
+        /// Control txtBusqueda.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBusqueda;
+
+        /// <summary>
+        /// Control btnBuscar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnBuscar;
+
+        /// <summary>
         /// Control btnNuevoProducto.
         /// </summary>
         /// <remarks>
@@ -24,13 +42,13 @@ namespace TPC_Resto
         protected global::System.Web.UI.WebControls.Button btnNuevoProducto;
 
         /// <summary>
-        /// Control insumosTableBody.
+        /// Control insumosTable.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl insumosTableBody;
+        protected global::System.Web.UI.WebControls.Table insumosTable;
 
         /// <summary>
         /// Control btnAnterior.
