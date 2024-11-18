@@ -1,0 +1,37 @@
+﻿/* Contenedor del filtro */
+.filtro-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+    /* Estilo del filtro */
+    .filtro-container .form-label {
+        margin-right: 10px;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    .filtro-container .form-control {
+        flex-grow: 1;
+        max-width: 250px;
+    }
+
+    .filtro-container .btn {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+/* Cartas de detalles del pedido */
+.card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+    /* Tabla dentro de las cartas */
+    .card .table {
+        margin-bottom: 0;
+    }

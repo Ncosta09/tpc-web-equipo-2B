@@ -10,7 +10,7 @@
             <div class="admin-card-body">
                 <p>Elige una opción para gestionar el sistema:</p>
                 
-                <a href="MenuPersonas.aspx" class="btn btn-secondary btn-lg">Menú Personas</a>
+                <a href="MenuPersonas.aspx" class="btn btn-secondary btn-lg">Menú Meseros</a>
                 <a href="MenuStock.aspx" class="btn btn-secondary btn-lg">Menú Recetas</a>
                 <a href="Ventas.aspx" class="btn btn-secondary btn-lg">Menú Ventas</a>
             </div>

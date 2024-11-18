@@ -56,10 +56,11 @@ namespace TPC_Resto
 
                 insumosTable.Rows.Clear(); // Limpiar las filas anteriores
 
-                bool hayProductos = false;
+                bool hayProductosPaginaActual = false; // Para verificar si hay productos en esta página
+
                 while (datos.Lector.Read())
                 {
-                    hayProductos = true;
+                    hayProductosPaginaActual = true;
 
                     // Crear una nueva fila de tabla
                     TableRow fila = new TableRow();
@@ -113,9 +114,9 @@ namespace TPC_Resto
                     insumosTable.Rows.Add(fila);
                 }
 
-                // Actualiza botone
+                // Actualizar botones de navegación
                 btnAnterior.Enabled = paginaActual > 1; // Deshabilitar si es la primera página
-                btnSiguiente.Enabled = hayProductos;    // Deshabilitar si no hay más productos
+                btnSiguiente.Enabled = hayProductosPaginaActual; // Deshabilitar si no hay más productos
 
                 lblPaginaActual.Text = "Página " + paginaActual;
             }
@@ -189,8 +190,33 @@ namespace TPC_Resto
 
         protected void btnSiguiente_Click(object sender, EventArgs e)
         {
-            paginaActual++;
-            CargarInsumos();
+            int offset = paginaActual * ProductosPorPagina;
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                string consulta = $@"
+                 SELECT COUNT(1) 
+                 FROM Insumos 
+                 WHERE Nombre LIKE @busqueda";
+
+                datos.setConsulta(consulta);
+                datos.setParametro("@busqueda", "%" + TerminoBusqueda + "%");
+                int totalProductos = Convert.ToInt32(datos.ejecutarScalar());
+
+                if (offset < totalProductos) // Verifica si hay mas recetas que cargar 
+                {
+                    paginaActual++;
+                    CargarInsumos();
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('Error al avanzar de página: " + ex.Message + "');</script>");
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
         }
 
         protected void btnBuscar_Click(object sender, EventArgs e)

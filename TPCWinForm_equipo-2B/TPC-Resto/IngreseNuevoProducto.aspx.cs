@@ -33,10 +33,7 @@ namespace TPC_Resto
             if (!IsPostBack)
             {
                 string idInsumoStr = Request.QueryString["id"];
-                if (!string.IsNullOrEmpty(idInsumoStr))
-                {
-                    Response.Write("<script>alert('ID recibido: " + idInsumoStr + "');</script>");
-                }
+              
             }
 
             if (!IsPostBack && IdInsumo.HasValue)

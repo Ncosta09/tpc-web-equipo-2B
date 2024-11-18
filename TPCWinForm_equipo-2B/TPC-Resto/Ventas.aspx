@@ -4,19 +4,16 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <link href="~/Content/Styles/Ventas.css" rel="stylesheet" />
 
     <div class="container mt-5">
         <h2 class="text-center mb-4">Ventas Totales por Pedido</h2>
 
         <!-- Filtro por fecha -->
-        <div class="row mb-3">
-            <div class="col-md-3">
-                <label for="txtFechaInicio" class="form-label">Filtrar por Fecha:</label>
-                <input type="date" id="txtFechaInicio" runat="server" class="form-control" />
-            </div>
-            <div class="col-md-3">
-                <asp:Button ID="btnFiltrar" runat="server" Text="Filtrar" OnClick="btnFiltrar_Click" CssClass="btn btn-dark" />
-            </div>
+        <div class="filtro-container mb-4">
+            <label for="txtFechaInicio" class="form-label mr-2">Filtrar por Fecha:</label>
+            <input type="date" id="txtFechaInicio" runat="server" class="form-control mr-3" />
+            <asp:Button ID="btnFiltrar" runat="server" Text="Filtrar" OnClick="btnFiltrar_Click" CssClass="btn btn-dark" />
         </div>
         
         <asp:Repeater ID="rptVentas" runat="server">
@@ -59,6 +56,5 @@
             <asp:Button ID="btnPrev" runat="server" Text="Anterior" OnClick="btnPrev_Click" CssClass="btn btn-dark" />
             <asp:Button ID="btnNext" runat="server" Text="Siguiente" OnClick="btnNext_Click" CssClass="btn btn-dark" />
         </div>
-
     </div>
 </asp:Content>

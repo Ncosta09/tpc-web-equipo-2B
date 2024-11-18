@@ -130,11 +130,13 @@
     <Content Include="Content\Styles\Header.css" />
     <Content Include="Content\Styles\LogIn.css" />
     <Content Include="Content\Styles\MainMenu.css" />
+    <Content Include="Content\Styles\MenuPersonas.css" />
     <Content Include="Content\Styles\Perfil.css" />
     <Content Include="Content\Styles\Registro.css" />
     <Content Include="Content\Styles\Reportes.css" />
     <Content Include="Content\Styles\Stock.css" />
     <Content Include="Content\Styles\salon.css" />
+    <Content Include="Content\Styles\Ventas.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="HomeMenu.aspx" />

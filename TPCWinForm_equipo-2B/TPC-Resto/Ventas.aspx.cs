@@ -44,7 +44,7 @@ namespace TPC_Resto
 
             try
             {
-                // filtro por fecha
+                // Filtro por fecha
                 string query = @"
                     SELECT P.IDPedido, M.NumeroMesa, P.FechaInicio, P.PrecioTotalMesa
                     FROM Pedidos AS P
@@ -60,7 +60,6 @@ namespace TPC_Resto
                     ORDER BY P.FechaInicio
                     OFFSET @skip ROWS FETCH NEXT @pageSize ROWS ONLY";
 
-                
                 datos.setConsulta(query);
                 datos.setParametro("@skip", (currentPage - 1) * pageSize);
                 datos.setParametro("@pageSize", pageSize);
@@ -90,7 +89,7 @@ namespace TPC_Resto
                 rptVentas.DataSource = ListaPedidos;
                 rptVentas.DataBind();
 
-                //habilitación de los botone
+                // Habilitar o deshabilitar los botones de paginación
                 btnPrev.Enabled = currentPage > 1;
                 btnNext.Enabled = ListaPedidos.Count == pageSize;
             }
@@ -143,7 +142,6 @@ namespace TPC_Resto
             return detalles;
         }
 
-        //filtro por fecha
         protected void btnFiltrar_Click(object sender, EventArgs e)
         {
             currentPage = 1; // Reiniciar a la primera página al aplicar el filtro
@@ -163,6 +161,13 @@ namespace TPC_Resto
         {
             currentPage++;
             CargarPedidos();
+
+            // Si no hay datos, retrocede a la página anterior
+            if (ListaPedidos.Count == 0)
+            {
+                currentPage--;
+                CargarPedidos();
+            }
         }
     }
 }

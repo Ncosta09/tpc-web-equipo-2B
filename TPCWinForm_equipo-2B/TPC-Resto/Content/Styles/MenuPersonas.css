@@ -1,0 +1,44 @@
+﻿/* Contenedor del filtro */
+.filtro-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+
+    .filtro-container .form-control {
+        max-width: 250px;
+        margin-right: 10px;
+    }
+
+    .filtro-container .btn {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+/* Tabla personalizada */
+.table {
+    border: 1px solid #ddd;
+    margin-bottom: 0;
+    font-size: 14px;
+}
+
+.table-dark th,
+.table-dark td {
+    color: #fff;
+    background-color: #343a40;
+}
+
+/* Paginación */
+.pagination {
+    margin-top: 20px;
+}
+
+    .pagination .btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .pagination .font-weight-bold {
+        font-size: 16px;
+    }
