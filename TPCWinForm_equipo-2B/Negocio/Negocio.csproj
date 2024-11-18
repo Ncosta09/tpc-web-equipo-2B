@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="AccesoDatos.cs" />
     <Compile Include="Charts.cs" />
+    <Compile Include="DatosReportes.cs" />
     <Compile Include="Insumos.cs" />
     <Compile Include="LogInUsuario.cs" />
     <Compile Include="MesasSalon.cs" />

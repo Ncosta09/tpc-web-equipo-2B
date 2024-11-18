@@ -35,7 +35,7 @@
     width: 85%;
 }
 
-.dashboard-one {
+.dashboard-one, .dashboard-two {
     height: 100%;
     width: 100%;
     display: flex;
