@@ -4,9 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net.Mail;
+using System.Net;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Text;
 
 namespace TPC_Resto
 {
@@ -21,17 +24,16 @@ namespace TPC_Resto
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Seguridad.sesionIniciada(Session["usuario"]))
-            {
-                Response.Redirect("Default.aspx", false);
-            }
+            //if (!Seguridad.sesionIniciada(Session["usuario"]))
+            //{
+            //    Response.Redirect("Default.aspx", false);
+            //}
 
 
             if (!IsPostBack)
             {
                 listarMesas();
             }
-
         }
         protected void Mesa_Click(object sender, EventArgs e)
         {
@@ -247,6 +249,117 @@ namespace TPC_Resto
 
             lblTotal.Text = "total = " + precioTotalMesa.ToString("C");
 
+        }
+
+        protected void BtnCerrarMesaAlert_Click(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "showModalAlert", "showModalAlert();", true);
+        }
+        protected void BtnCerrarFacturar_Alert(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "showModalFactura", "showModalFactura();", true);
+        }
+
+        private void EnviarCorreoResumen(dynamic resumen, string destinatario)
+        {
+            string emailRemitente = "sorteosutnfrgp@gmail.com";
+            string passwordRemitente = "vndz ynfs siso lsrq";  // Asegúrate de usar una contraseña segura
+
+            try
+            {
+                // Crear el correo
+                MailMessage correo = new MailMessage();
+                correo.From = new MailAddress(emailRemitente);
+                correo.To.Add(destinatario);  // Correo del destinatario
+                correo.Subject = $"Resumen de Pedido de Mesa {resumen.Mesa}";
+
+                // Crear el cuerpo del correo (con formato HTML)
+                StringBuilder cuerpo = new StringBuilder();
+                cuerpo.AppendLine($"<h3>Resumen de Pedido de Mesa {resumen.Mesa}</h3>");
+                cuerpo.AppendLine($"<p><strong>Total:</strong> {resumen.Total:C}</p>");
+                cuerpo.AppendLine("<p><strong>Detalles:</strong></p>");
+                cuerpo.AppendLine("<ul>");
+
+                // Añadir los detalles del pedido de forma dinámica
+                foreach (var detalle in resumen.Detalles)
+                {
+                    cuerpo.AppendLine($"<li>{detalle}</li>");
+                }
+
+                cuerpo.AppendLine("</ul>");
+
+                correo.Body = cuerpo.ToString();
+                correo.IsBodyHtml = true;  // Establecer el cuerpo como HTML
+
+                // Configurar el cliente SMTP
+                SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+                smtp.Credentials = new NetworkCredential(emailRemitente, passwordRemitente);
+                smtp.EnableSsl = true;
+
+                // Enviar el correo
+                smtp.Send(correo);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        protected void btnCerrarFacturar_Click(object sender, EventArgs e)
+        {
+            MesasSalon mesasSalon = new MesasSalon();
+            MeseroXMesa meseroMesa = new MeseroXMesa();
+            PedidosSalon pedidosSalon = new PedidosSalon();
+
+            int idMesa = Convert.ToInt32(Session["NumeroMesa"]);
+            int idPedidoActivo = pedidosSalon.ObtenerPedidoActivoPorMesa(idMesa);
+
+            string numeroMesaStr = Session["NumeroMesa"] as string;
+            int idUsuario = (int)ViewState["IdMeseroAsignado"];
+
+            if (!string.IsNullOrEmpty(numeroMesaStr) && int.TryParse(numeroMesaStr, out int numeroMesa))
+            {
+                // Traigo la lista con los totales de la mesa(db)
+                List<decimal> totalesPedido = pedidosSalon.BuscarTotal(idPedidoActivo);
+                // Sumo los totales para calcular el total de la mesa(db)
+                decimal sumaTotales = totalesPedido.Sum();
+                // Registro el total del pedido(db)
+                pedidosSalon.RegistarTotal(sumaTotales, idPedidoActivo);
+                // Cerrar pedido(db)
+                pedidosSalon.CerrarPedido(idPedidoActivo);
+                // Borro mesero de la mesa (db)
+                meseroMesa.DeleteMeseroMesa(idUsuario, numeroMesa);
+                // Actualizo estado de la mesa a 0 desocupada (db)
+                mesasSalon.ActualizarEstadoMesaCero(numeroMesa);
+
+                // Obtener los detalles del pedido (varios productos o insumos)
+                var detalles = pedidosSalon.ObtenerDetallesPedido(idPedidoActivo);
+                List<string> detallesResumen = detalles.Select(d => $"{d.Cantidad} x {d.Insumo.Nombre} - {d.PrecioUnitario:C} c/u (Total: {d.PrecioTotal:C})").ToList();
+
+                // Generar resumen del pedido
+                var resumen = new
+                {
+                    Mesa = numeroMesa,
+                    Total = sumaTotales,
+                    Detalles = detallesResumen
+                };
+
+                // Enviar resumen por correo
+                string correoCliente = txtCorreoCliente.Text.Trim();
+                if (!string.IsNullOrEmpty(correoCliente))
+                {
+                    EnviarCorreoResumen(resumen, correoCliente);
+                }
+                else
+                {
+                    lblMensajeError.Text = "Por favor, ingrese un correo válido.";
+                }
+                //string correoDestinatario = "ncosta981@gmail.com"; // Dirección de correo del destinatario
+                //EnviarCorreoResumen(resumen, correoDestinatario);
+
+                // Actualizar la vista o mostrar mensaje
+                listarMesas();  // Asumiendo que esto refresca la lista de mesas
+            }
         }
 
     }
