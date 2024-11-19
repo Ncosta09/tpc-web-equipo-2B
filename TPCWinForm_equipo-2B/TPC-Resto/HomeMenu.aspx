@@ -4,15 +4,18 @@
 
     <main class="contenedor">
         <div class="left-side">
-            <a runat="server" class="boton salon" href="~/Salon.aspx">Salon</a>
+
+
 
              <%if (Negocio.Seguridad.esAdmin(Session["usuario"]))
                { %>
+                    <a runat="server" class="boton salon" href="~/Salon.aspx">Salon</a>
                     <a runat="server" class="boton administracion" href="~/Administracion.aspx">Administracion</a>
                     <a runat="server" class="boton reporte" href="~/Reporte.aspx">Reportes</a>
              <%}
                else
                { %>
+                    <a runat="server" class="boton salon" href="~/SalonVistaMesero.aspx">Salon</a>
                     <a runat="server" class="boton NoAdministracion">Administracion</a>
                     <a runat="server" class="boton NoReporte">Reportes</a>
              <%} %>

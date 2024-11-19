@@ -134,6 +134,7 @@
     <Content Include="Content\Styles\Perfil.css" />
     <Content Include="Content\Styles\Registro.css" />
     <Content Include="Content\Styles\Reportes.css" />
+    <Content Include="Content\Styles\salonMeseros.css" />
     <Content Include="Content\Styles\Stock.css" />
     <Content Include="Content\Styles\salon.css" />
     <Content Include="Content\Styles\Ventas.css" />
@@ -148,6 +149,7 @@
     <Content Include="Registro.aspx" />
     <Content Include="Reporte.aspx" />
     <Content Include="Salon.aspx" />
+    <Content Include="SalonVistaMesero.aspx" />
     <Content Include="Script_JS\CambioCuadro.js" />
     <Content Include="Script_JS\Stock.js" />
     <Content Include="Script_JS\Modal.js" />
@@ -222,6 +224,13 @@
     </Compile>
     <Compile Include="Salon.aspx.designer.cs">
       <DependentUpon>Salon.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SalonVistaMesero.aspx.cs">
+      <DependentUpon>SalonVistaMesero.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SalonVistaMesero.aspx.designer.cs">
+      <DependentUpon>SalonVistaMesero.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>

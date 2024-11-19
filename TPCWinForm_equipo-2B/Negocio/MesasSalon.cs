@@ -114,5 +114,41 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+        public List<Mesa> listarMesasMesero(int IdUsuario)
+        {
+            List<Mesa> lista = new List<Mesa>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                //Consulta a la DB ¬
+                datos.setConsulta("select m.NumeroMesa, m.Estado from Mesas as m inner join UsuariosxMesa as U on u.IdMesa = m.IdMesa where m.Estado = 1 and u.IdUsuario = @IdUsuario;");
+                datos.setParametro("@IdUsuario", IdUsuario);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Mesa mes = new Mesa();
+
+                    mes.NumeroMesa = datos.Lector["NumeroMesa"] is DBNull ? 0 : Convert.ToInt32(datos.Lector["NumeroMesa"]);
+                    mes.Estado = datos.Lector["Estado"] is DBNull ? 0 : Convert.ToInt32(datos.Lector["Estado"]);
+                    lista.Add(mes);
+                }
+
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
     }
 }
