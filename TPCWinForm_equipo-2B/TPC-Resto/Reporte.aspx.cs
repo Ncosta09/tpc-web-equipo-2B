@@ -29,6 +29,7 @@ namespace TPC_Resto
                 CargarGrafico("diario");
                 CargarInsumoMasVendido();
                 CargarInsumoMenosVendido();
+                CargarDatos();
             }
         }
 
@@ -120,6 +121,26 @@ namespace TPC_Resto
                 lblMenosCantVendido.Text = insumoMenosVendido.TotalVendido.ToString();
             }
 
+        }
+
+        private void CargarDatos()
+        {
+            DatosReportes datosReportes = new DatosReportes();
+
+            try
+            {
+                List<Insumo> top3MasVendidos = datosReportes.ObtenerTop3MasVendidos();
+                gvMasVendidos.DataSource = top3MasVendidos;
+                gvMasVendidos.DataBind();
+
+                List<Insumo> top3MenosVendidos = datosReportes.ObtenerTop3MenosVendidos();
+                gvMenosVendidos.DataSource = top3MenosVendidos;
+                gvMenosVendidos.DataBind();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

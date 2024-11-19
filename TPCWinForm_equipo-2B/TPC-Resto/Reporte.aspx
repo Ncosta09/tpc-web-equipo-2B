@@ -42,7 +42,7 @@
                         <asp:ChartArea Name="ChartArea1">
 
                             <AxisX Title="Fecha"/>
-                            <AxisY Title="Ganancia" Interval="500" Minimum="0" />
+                            <AxisY Title="Ganancia" Interval="1000" Minimum="0" />
                             
                         </asp:ChartArea>
                     </ChartAreas>
@@ -53,25 +53,53 @@
                 <h2>Insumos</h2>
 
                 <div class="insumo-list">
+                    <div class="top-sellers">
+                        <h3>Top 3 Insumos Más Vendidos</h3>
+                        <asp:GridView ID="gvMasVendidos" runat="server" CssClass="table-style" AutoGenerateColumns="false">
+                            <Columns>
+                                <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
+                                <asp:BoundField DataField="TotalVendido" HeaderText="Cantidad Vendida" />
+                            </Columns>
+                        </asp:GridView>
+                    </div>
 
+                    <div class="least-sellers">
+                        <h3>Top 3 Insumos Menos Vendidos</h3>
+                        <asp:GridView ID="gvMenosVendidos" runat="server" CssClass="table-style" AutoGenerateColumns="false">
+                            <Columns>
+                                <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
+                                <asp:BoundField DataField="TotalVendido" HeaderText="Cantidad Vendida" />
+                            </Columns>
+                        </asp:GridView>
+                    </div>
                 </div>
+                
+                <div class="insumo-list">
+                    <div class="insumo-one">
+                        <h3>Insumo mas vendido</h3>
+                        <%--<asp:Image ID="Image1" runat="server" />--%>
+                        <div class="order-list">
+                            <asp:Label runat="server" Text="Nombre:"></asp:Label>
+                            <asp:Label CssClass="negrita" ID="lblNombreMas" runat="server"></asp:Label>
+                        </div>
+                        <div class="order-list">
+                            <asp:Label runat="server" Text="Cantidad Vendidos:"></asp:Label>
+                            <asp:Label CssClass="negrita" ID="lblMasCantVendido" runat="server" ></asp:Label>
+                        </div>
+                    </div>
 
-                <div class="insumo-left">
-                    <h3>Insumo mas vendido</h3>
-                    <%--<asp:Image ID="Image1" runat="server" />--%>
-                    <asp:Label runat="server" Text="Nombre:"></asp:Label>
-                    <asp:Label ID="lblNombreMas" runat="server"></asp:Label>
-                    <asp:Label runat="server" Text="Cantidad Vendidos:"></asp:Label>
-                    <asp:Label ID="lblMasCantVendido" runat="server" ></asp:Label>
-                </div>
-
-                <div class="insumo-right">
-                    <h3>Insumo menos vendido</h3>
-                    <%--<asp:Image ID="Image1" runat="server" />--%>
-                    <asp:Label runat="server" Text="Nombre:"></asp:Label>
-                    <asp:Label ID="lblNombreMenos" runat="server"></asp:Label>
-                    <asp:Label runat="server" Text="Cantidad Vendidos:"></asp:Label>
-                    <asp:Label ID="lblMenosCantVendido" runat="server"></asp:Label>
+                    <div class="insumo-two">
+                        <h3>Insumo menos vendido</h3>
+                        <%--<asp:Image ID="Image1" runat="server" />--%>
+                        <div class="order-list">
+                            <asp:Label runat="server" Text="Nombre:"></asp:Label>
+                            <asp:Label CssClass="negrita" ID="lblNombreMenos" runat="server"></asp:Label>
+                        </div>
+                        <div class="order-list">
+                            <asp:Label runat="server" Text="Cantidad Vendidos:"></asp:Label>
+                            <asp:Label CssClass="negrita" ID="lblMenosCantVendido" runat="server"></asp:Label>
+                        </div>
+                    </div>    
                 </div>
 
             </div>
