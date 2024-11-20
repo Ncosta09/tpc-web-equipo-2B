@@ -16,6 +16,7 @@ namespace Dominio
         public string Contrasenia { get; set; }
         public string Imagen { get; set; }
         public Rol Rol { get; set; }
+        public int MesasAtendidas { get; set; }
 
     }
 

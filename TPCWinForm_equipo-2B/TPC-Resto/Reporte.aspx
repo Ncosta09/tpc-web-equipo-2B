@@ -103,6 +103,26 @@
                 </div>
 
             </div>
+
+             <div class="dashboard-three">
+                <h2>Mesero</h2>
+                 <div class="mesero-dashboard">
+                    <h3>Mesero que mas mesas atendio</h3>
+                        <div class="profile-image-mesero">
+                            <asp:Image ID="imgMesero" runat="server" AlternateText="Imagen de perfil" />
+                        </div>
+                        <div class="informacion-mesas-dashboard">
+                            <asp:Label runat="server" Text="Nombre:" CssClass="txtLiso"></asp:Label>
+                            <asp:Label ID="lblNombreMesero" runat="server" CssClass="txtCargado"></asp:Label>
+                            <asp:Label runat="server" Text="Apellido:" CssClass="txtLiso"></asp:Label>
+                            <asp:Label ID="lblApellidoMesero" runat="server" CssClass="txtCargado"></asp:Label>
+                        </div>
+                        <div class="info-cantidad-mesas-dashboard">
+                            <asp:Label runat="server" Text="Cantidad de mesas atendidas:" CssClass="txtLiso"></asp:Label>
+                            <asp:Label ID="lblCantidadMesas" runat="server" CssClass="txtMesas"></asp:Label>
+                        </div>
+                 </div>
+            </div>
         </div>
     </main>
 

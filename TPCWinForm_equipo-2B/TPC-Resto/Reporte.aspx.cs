@@ -30,6 +30,7 @@ namespace TPC_Resto
                 CargarInsumoMasVendido();
                 CargarInsumoMenosVendido();
                 CargarDatos();
+                meseroMasMesasAtendio();
             }
         }
 
@@ -141,6 +142,21 @@ namespace TPC_Resto
             {
                 throw ex;
             }
+        }
+
+        private void meseroMasMesasAtendio()
+        {
+            DatosReportes reporteMas = new DatosReportes();
+            Usuario meseroMes = reporteMas.meseroDelMes();
+
+            if (meseroMes != null)
+            {
+                lblNombreMesero.Text = meseroMes.Nombre;
+                lblApellidoMesero.Text = meseroMes.Apellido;
+                lblCantidadMesas.Text = meseroMes.MesasAtendidas.ToString();
+                imgMesero.ImageUrl = meseroMes.Imagen;
+            }
+
         }
     }
 }

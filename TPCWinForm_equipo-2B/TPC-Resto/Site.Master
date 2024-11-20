@@ -49,6 +49,7 @@
                 <%}
                   else
                   { %>
+                    <li><a runat="server" href="~/HomeMenu.aspx">Inicio</a></li>
                     <li><a runat="server" href="~/Perfil.aspx">Perfil</a></li>
                     <li><asp:LinkButton ID="logOut" OnClick="logOut_Click" runat="server" >Cerrar Sesion</asp:LinkButton></li>
                 <%} %>
