@@ -159,6 +159,15 @@ namespace TPC_Resto
         protected global::System.Web.UI.WebControls.Button btnAsignarMesero;
 
         /// <summary>
+        /// lblTextoBotonera control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTextoBotonera;
+
+        /// <summary>
         /// btnCancelar control.
         /// </summary>
         /// <remarks>
@@ -202,15 +211,6 @@ namespace TPC_Resto
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCorreoCliente;
-
-        /// <summary>
-        /// lblMensajeError control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMensajeError;
 
         /// <summary>
         /// Button2 control.

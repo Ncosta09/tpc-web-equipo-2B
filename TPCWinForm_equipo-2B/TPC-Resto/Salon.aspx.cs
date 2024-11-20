@@ -24,10 +24,10 @@ namespace TPC_Resto
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (!Seguridad.sesionIniciada(Session["usuario"]))
-            //{
-            //    Response.Redirect("Default.aspx", false);
-            //}
+            if (!Seguridad.sesionIniciada(Session["usuario"]))
+            {
+                Response.Redirect("Default.aspx", false);
+            }
 
 
             if (!IsPostBack)
@@ -346,14 +346,8 @@ namespace TPC_Resto
 
                 // Enviar resumen por correo
                 string correoCliente = txtCorreoCliente.Text.Trim();
-                if (!string.IsNullOrEmpty(correoCliente))
-                {
-                    EnviarCorreoResumen(resumen, correoCliente);
-                }
-                else
-                {
-                    lblMensajeError.Text = "Por favor, ingrese un correo válido.";
-                }
+                EnviarCorreoResumen(resumen, correoCliente);
+                
                 //string correoDestinatario = "ncosta981@gmail.com"; // Dirección de correo del destinatario
                 //EnviarCorreoResumen(resumen, correoDestinatario);
 

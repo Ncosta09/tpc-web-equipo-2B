@@ -2,6 +2,21 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
+    <script>
+        function validarCorreo() {
+            var correo = document.getElementById('<%= txtCorreoCliente.ClientID %>').value.trim();
+            if (!correo) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Por favor, ingrese un correo válido."
+                });
+                return false;
+            }
+            return true;
+        }
+    </script>
+
     <div class="section1">
 
         <div class="col-izq">
@@ -50,9 +65,9 @@
 
                 <div class="row-btn">
                     <div class="botons">
-                        <asp:Button ID="BtnAgregarInsumo" runat="server" Text="agregar insumo" OnClick="BtnAgregarInsumo_Click" OnClientClick="showModalInsumo(); return true;" />
+                        <asp:Button CssClass="boton-carrito" ID="BtnAgregarInsumo" runat="server" Text="agregar insumo" OnClick="BtnAgregarInsumo_Click" OnClientClick="showModalInsumo(); return true;" />
                         <%// habre popup con insumos, se seleccionan y se agregan al gridview (todos sus valores) %>
-                        <asp:Button ID="BtnCerrarMesa" runat="server" Text="cerrar mesa"  OnClick="BtnCerrarMesaAlert_Click" OnClientClick="showModalAlert();"/>
+                        <asp:Button CssClass="boton-carrito" ID="BtnCerrarMesa" runat="server" Text="cerrar mesa"  OnClick="BtnCerrarMesaAlert_Click" OnClientClick="showModalAlert();"/>
                         <%// <asp:Button ID="BtnCerrarMesa" runat="server" Text="cerrar mesa" OnClick="BtnCerrarMesa_Click" />  cierra la mesa %>
                     </div>
                     <asp:Label ID="lblTotal" runat="server" Text=""></asp:Label>
@@ -74,7 +89,7 @@
                 <asp:TextBox CssClass="txtBoxInsumos" ID="txtCantidad" runat="server" TextMode="Number" oninput="this.value = this.value.replace(/[^1-9]/g, '')" Text="0"></asp:TextBox>
             </div>
 
-            <asp:Button ID="Insumos" runat="server" Text="Agregar Insumo" OnClick="Insumos_Click" />
+            <asp:Button CssClass="boton-carrito" ID="Insumos" runat="server" Text="Agregar Insumo" OnClick="Insumos_Click" />
         </div>
     </div>
 
@@ -85,30 +100,36 @@
             <%--<span class="close"></span>--%>
             <h3>Asignar Mesero</h3>
             <asp:Label ID="lblNumeroMesa" runat="server" Text=""></asp:Label>
-
-            <asp:DropDownList CssClass="ddlistMeseros" ID="ddlMeseros" runat="server"></asp:DropDownList>
-
-            <asp:Button ID="btnAsignarMesero" runat="server" Text="Asignar Mesero" OnClick="btnAsignarMesero_Click" />
+            <div class="ajustar-tamaño">
+                <asp:DropDownList CssClass="ddlistMeseros tamanio-aparte-lista" ID="ddlMeseros" runat="server"></asp:DropDownList>
+                <asp:Button CssClass="boton-carrito" ID="btnAsignarMesero" runat="server" Text="Asignar Mesero" OnClick="btnAsignarMesero_Click" />
+            </div>
         </div>
     </div>
 
         <%-- Modal Alert --%>
-    <div id="CierreMesa" class="modal">
+    <div id="CierreMesa" class="modal tamanio-modal">
         <div class="modal-content">
-            <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" OnClientClick="closeModalAlert(); return false;" />
-            <asp:Button ID="btnCerrarFacturar" runat="server" Text="Cerrar mesa y Enviar Factura" OnClick="BtnCerrarFacturar_Alert" OnClientClick="showModalFactura();"/>
-            <asp:Button ID="btnCerrar" runat="server" Text="Cerrar mesa" OnClick="BtnCerrarMesa_Click"/>
+            <div class="texto-botonera">
+                <asp:Label ID="lblTextoBotonera" runat="server" Text="Seleccione una opcion!"></asp:Label>
+            </div>
+            <div class="botonera-modal">
+                <asp:Button CssClass="boton-carrito" ID="btnCancelar" runat="server" Text="Cancelar" OnClientClick="closeModalAlert(); return false;" />
+                <asp:Button CssClass="boton-carrito" ID="btnCerrarFacturar" runat="server" Text="Cerrar mesa y Enviar Factura" OnClick="BtnCerrarFacturar_Alert" OnClientClick="showModalFactura();"/>
+                <asp:Button CssClass="boton-carrito" ID="btnCerrar" runat="server" Text="Cerrar mesa" OnClick="BtnCerrarMesa_Click"/>
+            </div>
         </div>
     </div>
 
             <%-- Modal Enviar Factura --%>
     <div id="enviarFactura" class="modal">
-        <div class="modal-content">
+        <div class="modal-content ">
             <asp:Button class="close" runat="server" Text="&times;" />
             <asp:Label ID="lblCorreoCliente" runat="server" Text="Correo Cliente:"></asp:Label>
-            <asp:TextBox ID="txtCorreoCliente" runat="server"></asp:TextBox>
-            <asp:Label ID="lblMensajeError" runat="server"></asp:Label>
-            <asp:Button ID="Button2" runat="server" Text="Enviar" OnClick="btnCerrarFacturar_Click"/>
+            <div class="mail-container">
+                <asp:TextBox CssClass="place-text" TextMode="Email" placeholder="Correo" ID="txtCorreoCliente" runat="server"></asp:TextBox>
+                <asp:Button CssClass="boton-carrito" ID="Button2" runat="server" Text="Enviar" OnClick="btnCerrarFacturar_Click" OnClientClick="return validarCorreo();" />
+            </div>
         </div>
     </div>
 </asp:Content>
