@@ -50,6 +50,29 @@ namespace Negocio
             }
         }
 
+
+
+        public void ModificarReestock(int IdInsumo, int cantidad)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setConsulta("UPDATE Insumos SET Stock = (Stock + @cantidad) WHERE IdInsumo = @IdInsumo;");
+                datos.setParametro("@IdInsumo", IdInsumo);
+                datos.setParametro("@cantidad", cantidad);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+
         public void CerrarPedido(int idPedido)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -257,6 +280,33 @@ namespace Negocio
                     return Convert.ToInt32(datos.Lector["IDPedido"]);
                 }
                 return -1;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public (int IdInsumo, int Cantidad) ObtenerInsumoDetalle(int IdDetalle)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setConsulta("SELECT IdInsumo, Cantidad FROM DetallePedidos WHERE IdDetalle = @IdDetalle");
+                datos.setParametro("@IdDetalle", IdDetalle);
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    int idInsumo = Convert.ToInt32(datos.Lector["IdInsumo"]);
+                    int cantidad = Convert.ToInt32(datos.Lector["Cantidad"]);
+                    return (idInsumo, cantidad);
+                }
+                return (-1, 0);
             }
             catch (Exception ex)
             {

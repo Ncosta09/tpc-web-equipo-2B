@@ -392,10 +392,17 @@ namespace TPC_Resto
 
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
-            Button btn = (Button)sender;
-            int idDetallePedido = Convert.ToInt32(btn.CommandArgument);
 
             PedidosSalon pedidosSalon = new PedidosSalon();
+            Button btn = (Button)sender;
+            int idDetallePedido = Convert.ToInt32(btn.CommandArgument);
+            var resultado = pedidosSalon.ObtenerInsumoDetalle(idDetallePedido);
+            
+            int Insumo = resultado.IdInsumo;
+            int cantidad = resultado.Cantidad;
+
+
+            pedidosSalon.ModificarReestock(Insumo, cantidad);
             pedidosSalon.EliminarDetallePedido(idDetallePedido);
 
             int numeroMesa = Convert.ToInt32(Session["NumeroMesa"]);
