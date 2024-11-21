@@ -29,7 +29,7 @@
 
             <div class="profile-buttons">
 
-                <asp:Button ID="btnModificar" runat="server" Text="Modificar" CssClass="profile-button" />
+                <%--<asp:Button ID="btnModificar" runat="server" Text="Modificar" CssClass="profile-button" />--%>
                 <asp:Button ID="btnCerrarSesion" runat="server" Text="Cerrar Sesión" CssClass="profile-button logout-button" OnClick="btnCerrarSesion_Click" />
 
             </div>
