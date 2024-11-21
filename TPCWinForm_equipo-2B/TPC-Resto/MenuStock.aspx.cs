@@ -65,10 +65,16 @@ namespace TPC_Resto
                     // Crear una nueva fila de tabla
                     TableRow fila = new TableRow();
 
+                  
                     // Imagen
                     TableCell celdaImagen = new TableCell();
-                    celdaImagen.Text = $"<img src='{datos.Lector["ImagenURL"]}' alt='{datos.Lector["Nombre"]}' class='img-thumbnail' style='width: 50px; height: 50px;'>";
+                    string imagenUrl = datos.Lector["ImagenURL"] != DBNull.Value && !string.IsNullOrEmpty(datos.Lector["ImagenURL"].ToString())
+                        ? datos.Lector["ImagenURL"].ToString()
+                        : "/Content/Images/default-recipe.png"; 
+                    celdaImagen.Text = $"<img src='{imagenUrl}' alt='{datos.Lector["Nombre"]}' class='img-thumbnail' style='width: 50px; height: 50px;'>";
                     fila.Cells.Add(celdaImagen);
+
+
 
                     // Nombre
                     TableCell celdaNombre = new TableCell();

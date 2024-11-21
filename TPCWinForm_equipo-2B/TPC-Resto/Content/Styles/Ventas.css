@@ -1,4 +1,9 @@
-﻿/* Contenedor del filtro */
+﻿.detalle-venta-scroll {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+/* Contenedor del filtro */
 .filtro-container {
     display: flex;
     align-items: center;
@@ -35,3 +40,4 @@
     .card .table {
         margin-bottom: 0;
     }
+

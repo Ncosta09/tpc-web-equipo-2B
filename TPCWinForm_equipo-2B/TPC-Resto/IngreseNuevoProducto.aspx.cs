@@ -19,7 +19,9 @@ namespace TPC_Resto
                 return null;
             }
         }
-     
+
+        private const string ImagenPorDefecto = "~/Content/Images/default-recipe.png"; // Ruta de la imagen por defecto
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Seguridad.sesionIniciada(Session["usuario"]))
@@ -33,15 +35,11 @@ namespace TPC_Resto
 
             if (!IsPostBack)
             {
-                string idInsumoStr = Request.QueryString["id"];
-              
+                if (IdInsumo.HasValue)
+                {
+                    CargarProducto(IdInsumo.Value); // Precargar los datos si se está editando
+                }
             }
-
-            if (!IsPostBack && IdInsumo.HasValue)
-            {
-                CargarProducto(IdInsumo.Value); // Precargar los datos si se está editando
-            }
-          
         }
 
         private void CargarProducto(int idInsumo)
@@ -80,15 +78,15 @@ namespace TPC_Resto
         protected void btnGuardarProducto_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtNombre.Text) ||
-                string.IsNullOrWhiteSpace(txtImagenURL.Text) ||
                 string.IsNullOrWhiteSpace(txtPrecio.Text) ||
                 string.IsNullOrWhiteSpace(txtStock.Text))
             {
                 string alertScript = "Swal.fire({ icon: 'error', title: 'Oops...', text: 'Por favor, complete todos los campos correctamente.' });";
                 ClientScript.RegisterStartupScript(this.GetType(), "NewProductError", alertScript, true);
-                //Response.Write("<script>alert('Por favor, completa todos los campos');</script>");
                 return;
             }
+
+            string imagenURL = string.IsNullOrWhiteSpace(txtImagenURL.Text) ? ImagenPorDefecto : txtImagenURL.Text;
 
             AccesoDatos datos = new AccesoDatos();
             try
@@ -113,7 +111,7 @@ namespace TPC_Resto
 
                 // Asignar los parámetros comunes
                 datos.setParametro("@Nombre", txtNombre.Text);
-                datos.setParametro("@ImagenURL", txtImagenURL.Text);
+                datos.setParametro("@ImagenURL", imagenURL);
                 datos.setParametro("@Precio", decimal.Parse(txtPrecio.Text));
                 datos.setParametro("@Stock", int.Parse(txtStock.Text));
                 datos.ejecutarAccion();
