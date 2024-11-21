@@ -234,8 +234,9 @@ namespace TPC_Resto
 
             // Crear DataTable para cargar los detalles del pedido
             DataTable dt = new DataTable();
-            dt.Columns.AddRange(new DataColumn[4]
+            dt.Columns.AddRange(new DataColumn[5]
             {
+                new DataColumn("IdDetalle", typeof(int)),
                 new DataColumn("Insumo", typeof(string)),
                 new DataColumn("Cantidad", typeof(int)),
                 new DataColumn("Precio Unitario", typeof(decimal)),
@@ -247,7 +248,7 @@ namespace TPC_Resto
             // Agregar los detalles del pedido al DataTable
             foreach (var detalle in detallesPedido)
             {
-                dt.Rows.Add(detalle.Insumo.Nombre, detalle.Cantidad, detalle.PrecioUnitario, detalle.PrecioTotal);
+                dt.Rows.Add(detalle.ID , detalle.Insumo.Nombre, detalle.Cantidad, detalle.PrecioUnitario, detalle.PrecioTotal);
                 precioTotalMesa += detalle.PrecioTotal;
             }
 
@@ -362,6 +363,44 @@ namespace TPC_Resto
                 // Actualizar la vista o mostrar mensaje
                 listarMesas();  // Asumiendo que esto refresca la lista de mesas
             }
+        }
+
+        //protected void gridInsumos_RowCommand(object sender, GridViewCommandEventArgs e)
+        //{
+        //    if (e.CommandName == "Eliminar")
+        //    {
+        //        int rowIndex = Convert.ToInt32(e.CommandArgument);
+        //        int idInsumo = Convert.ToInt32(gridInsumos.DataKeys[rowIndex].Values["IdInsumo"]); // Obtiene el ID del insumo
+        //        int cantidad = Convert.ToInt32(gridInsumos.DataKeys[rowIndex].Values["Cantidad"]); // Obtiene la cantidad
+
+        //        PedidosSalon pedidosNegocio = new PedidosSalon();
+        //        try
+        //        {
+        //            // Elimina el detalle del pedido
+        //            pedidosNegocio.EliminarDetallePedido(idInsumo, cantidad);
+
+        //            // Actualiza el stock
+        //            pedidosNegocio.ModificarStock(idInsumo, -cantidad);
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            // Manejo de errores
+        //            throw ex;
+        //        }
+        //    }
+        //}
+
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            int idDetallePedido = Convert.ToInt32(btn.CommandArgument);
+
+            PedidosSalon pedidosSalon = new PedidosSalon();
+            pedidosSalon.EliminarDetallePedido(idDetallePedido);
+
+            int numeroMesa = Convert.ToInt32(Session["NumeroMesa"]);
+            ActualizarGridInsumos(numeroMesa);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "showCard", "document.querySelector('.card').style.display = 'flex';", true);
         }
 
     }

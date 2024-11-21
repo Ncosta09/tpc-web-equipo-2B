@@ -215,3 +215,16 @@
 .tamanio-aparte-lista {
     width: 80%;
 }
+
+.btn-eliminar {
+    background-color: red;
+    color: white;
+    border: 1px solid black;
+    border-radius: 2px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+    .btn-eliminar:hover {
+        background-color: #d32f2f;
+    }

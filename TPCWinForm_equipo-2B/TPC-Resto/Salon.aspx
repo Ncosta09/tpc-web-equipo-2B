@@ -52,12 +52,18 @@
 
                 <%--<asp:ListView ID="lista_insumos" runat="server"></asp:ListView>--%>
                 <div class="grid">
-                    <asp:GridView ID="gridInsumos" runat="server" AutoGenerateColumns="false" CssClass="gridInsumos">
+                    <asp:GridView ID="gridInsumos" runat="server" AutoGenerateColumns="False" CssClass="gridInsumos">
                         <Columns>
+                             <asp:BoundField DataField="IdDetalle" HeaderText="ID" Visible="false" SortExpression="IdDetalle" />
                             <asp:BoundField DataField="Insumo" HeaderText="Insumo" />
                             <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" />
                             <asp:BoundField DataField="Precio Unitario" HeaderText="Precio Unitario" DataFormatString="{0:C}" />
                             <asp:BoundField DataField="Precio Total" HeaderText="Precio Total" DataFormatString="{0:C}" />
+                              <asp:TemplateField>
+                                <ItemTemplate>
+                                      <asp:Button runat="server" Text="Eliminar" CommandName="Eliminar" CommandArgument='<%#Eval("IdDetalle") %>' OnClick="btnEliminar_Click" cssClass="btn-eliminar"/>
+                                </ItemTemplate>
+                            </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
                 </div>

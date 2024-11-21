@@ -10,12 +10,32 @@ namespace Negocio
     public class PedidosSalon
     {
 
+        public void EliminarDetallePedido(int idDetallePedido)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setConsulta("DELETE FROM DetallePedidos WHERE IdDetalle = @idDetallePedido");
+                datos.setParametro("@idDetallePedido", idDetallePedido);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+
         public void ModificarStock(int IdInsumo, int cantidad)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setConsulta("UPDATE Insumos SET Stock = (Stock - @cantidad) WHERE IdInsumo = @IdInsumo;;");
+                datos.setConsulta("UPDATE Insumos SET Stock = (Stock - @cantidad) WHERE IdInsumo = @IdInsumo;");
                 datos.setParametro("@IdInsumo", IdInsumo);
                 datos.setParametro("@cantidad", cantidad);
                 datos.ejecutarAccion();
