@@ -103,6 +103,12 @@ namespace TPC_Resto
 
                     listarMesas();
                 }
+                else
+                {
+                    string alertScript = "Swal.fire({ icon: 'error', title: 'Oops...', text: 'Seleccione algun mesero' });";
+                    ClientScript.RegisterStartupScript(this.GetType(), "meseroInvalido", alertScript, true);
+                    return;
+                }
             }
         }
 
@@ -179,7 +185,8 @@ namespace TPC_Resto
 
                 if (insumoSeleccionado.Stock < cantidad)
                 {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alertStock", "alert('El stock es insuficiente.');", true);
+                    string alertScript = "Swal.fire({ icon: 'error', title: 'Oops...', text: 'El stock es insuficiente.' });";
+                    ClientScript.RegisterStartupScript(this.GetType(), "stockInsuficiente", alertScript, true);
                     return;
                 }
                 else
@@ -199,14 +206,15 @@ namespace TPC_Resto
             }
             else
             {
-                // Mostrar un mensaje de error con JavaScript si la cantidad no es válida
                 if (ddlInsumos.SelectedValue == "0")
                 {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alertInsumo", "alert('Por favor, seleccione un insumo válido.');", true);
+                    string alertScript = "Swal.fire({ icon: 'error', title: 'Oops...', text: 'Por favor, seleccione un insumo válido.' });";
+                    ClientScript.RegisterStartupScript(this.GetType(), "insumoInvalido", alertScript, true);
                 }
                 else
                 {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alertCantidad", "alert('Por favor ingrese una cantidad válida mayor a 0.');", true);
+                    string alertScript = "Swal.fire({ icon: 'error', title: 'Oops...', text: 'Por favor ingrese una cantidad válida mayor a 0.' });";
+                    ClientScript.RegisterStartupScript(this.GetType(), "ingresoInvalido", alertScript, true);
                 }
             }
 

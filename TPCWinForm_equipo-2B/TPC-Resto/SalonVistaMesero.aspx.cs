@@ -52,15 +52,8 @@ namespace TPC_Resto
             MesasSalon mesasSalon = new MesasSalon();
             Button clickedButton = (Button)sender;
             string numeroMesa = clickedButton.Text;
-            lblNumeroMesa.Text = "Mesa: " + numeroMesa;
             Session["NumeroMesa"] = numeroMesa;
             int estadoMesa = mesasSalon.ObtenerEstadoMesa(int.Parse(numeroMesa));
-
-            ddlMeseros.DataSource = meseroMesa.listarMesero();
-            ddlMeseros.DataTextField = "Nombre";
-            ddlMeseros.DataValueField = "ID";
-            ddlMeseros.DataBind();
-            ddlMeseros.Items.Insert(0, new ListItem("Selecciona un mesero", "0"));
 
             if (estadoMesa == 0)
             {
@@ -84,69 +77,69 @@ namespace TPC_Resto
         }
 
 
-        protected void btnAsignarMesero_Click(object sender, EventArgs e)
-        {
-            MesasSalon mesasSalon = new MesasSalon();
-            MeseroXMesa meseroMesa = new MeseroXMesa();
-            string numeroMesaStr = Session["NumeroMesa"] as string;
-            int idUsuario = int.Parse(ddlMeseros.SelectedValue);
+        //protected void btnAsignarMesero_Click(object sender, EventArgs e)
+        //{
+        //    MesasSalon mesasSalon = new MesasSalon();
+        //    MeseroXMesa meseroMesa = new MeseroXMesa();
+        //    string numeroMesaStr = Session["NumeroMesa"] as string;
+        //    int idUsuario = int.Parse(ddlMeseros.SelectedValue);
 
 
 
-            //Verifico que el número de mesa no sea nulo
-            if (!string.IsNullOrEmpty(numeroMesaStr) && int.TryParse(numeroMesaStr, out int numeroMesa))
-            {
-                //Verifico que se haya seleccionado un mesero
-                if (ddlMeseros.SelectedValue != "0")
-                {
-                    //inserto mesero en la mesa (db)
-                    meseroMesa.InsertarMeseroMesa(idUsuario, numeroMesa);
+        //    //Verifico que el número de mesa no sea nulo
+        //    if (!string.IsNullOrEmpty(numeroMesaStr) && int.TryParse(numeroMesaStr, out int numeroMesa))
+        //    {
+        //        //Verifico que se haya seleccionado un mesero
+        //        if (ddlMeseros.SelectedValue != "0")
+        //        {
+        //            //inserto mesero en la mesa (db)
+        //            meseroMesa.InsertarMeseroMesa(idUsuario, numeroMesa);
 
-                    PedidosSalon pedidosSalon = new PedidosSalon();
-                    DateTime fechaInicio = DateTime.Now;
-                    int estado = 0;
+        //            PedidosSalon pedidosSalon = new PedidosSalon();
+        //            DateTime fechaInicio = DateTime.Now;
+        //            int estado = 0;
 
-                    //Creacion de pedido
-                    pedidosSalon.RegistrarPedido(numeroMesa, idUsuario, fechaInicio, estado);
+        //            //Creacion de pedido
+        //            pedidosSalon.RegistrarPedido(numeroMesa, idUsuario, fechaInicio, estado);
 
-                    //Actualizar estado de la mesa a 1 ocupada (db)
-                    mesasSalon.ActualizarEstadoMesaUno(numeroMesa);
+        //            //Actualizar estado de la mesa a 1 ocupada (db)
+        //            mesasSalon.ActualizarEstadoMesaUno(numeroMesa);
 
-                    listarMesas();
-                }
-            }
-        }
+        //            listarMesas();
+        //        }
+        //    }
+        //}
 
-        protected void BtnCerrarMesa_Click(object sender, EventArgs e)
-        {
-            MesasSalon mesasSalon = new MesasSalon();
-            MeseroXMesa meseroMesa = new MeseroXMesa();
-            PedidosSalon pedidosSalon = new PedidosSalon();
+        //protected void BtnCerrarMesa_Click(object sender, EventArgs e)
+        //{
+        //    MesasSalon mesasSalon = new MesasSalon();
+        //    MeseroXMesa meseroMesa = new MeseroXMesa();
+        //    PedidosSalon pedidosSalon = new PedidosSalon();
 
-            int idMesa = Convert.ToInt32(Session["NumeroMesa"]);
-            int idPedidoActivo = pedidosSalon.ObtenerPedidoActivoPorMesa(idMesa);
+        //    int idMesa = Convert.ToInt32(Session["NumeroMesa"]);
+        //    int idPedidoActivo = pedidosSalon.ObtenerPedidoActivoPorMesa(idMesa);
 
-            string numeroMesaStr = Session["NumeroMesa"] as string;
-            int idUsuario = (int)ViewState["IdMeseroAsignado"];
+        //    string numeroMesaStr = Session["NumeroMesa"] as string;
+        //    int idUsuario = (int)ViewState["IdMeseroAsignado"];
 
-            if (!string.IsNullOrEmpty(numeroMesaStr) && int.TryParse(numeroMesaStr, out int numeroMesa))
-            {
+        //    if (!string.IsNullOrEmpty(numeroMesaStr) && int.TryParse(numeroMesaStr, out int numeroMesa))
+        //    {
 
-                //Traigo la lista con los totales de la mesa(db)
-                List<decimal> totalesPedido = pedidosSalon.BuscarTotal(idPedidoActivo);
-                //Sumo los totales para calcular el total de la mesa(db)
-                decimal sumaTotales = totalesPedido.Sum();
-                //Registro el total del pedido(db)
-                pedidosSalon.RegistarTotal(sumaTotales, idPedidoActivo);
-                //Cerrar pedido(db)
-                pedidosSalon.CerrarPedido(idPedidoActivo);
-                //Borro mesero de la mesa (db)
-                meseroMesa.DeleteMeseroMesa(idUsuario, numeroMesa);
-                //Actualizar estado de la mesa a 0 desocupada (db)
-                mesasSalon.ActualizarEstadoMesaCero(numeroMesa);
-                listarMesas();
-            }
-        }
+        //        //Traigo la lista con los totales de la mesa(db)
+        //        List<decimal> totalesPedido = pedidosSalon.BuscarTotal(idPedidoActivo);
+        //        //Sumo los totales para calcular el total de la mesa(db)
+        //        decimal sumaTotales = totalesPedido.Sum();
+        //        //Registro el total del pedido(db)
+        //        pedidosSalon.RegistarTotal(sumaTotales, idPedidoActivo);
+        //        //Cerrar pedido(db)
+        //        pedidosSalon.CerrarPedido(idPedidoActivo);
+        //        //Borro mesero de la mesa (db)
+        //        meseroMesa.DeleteMeseroMesa(idUsuario, numeroMesa);
+        //        //Actualizar estado de la mesa a 0 desocupada (db)
+        //        mesasSalon.ActualizarEstadoMesaCero(numeroMesa);
+        //        listarMesas();
+        //    }
+        //}
 
         protected void BtnAgregarInsumo_Click(object sender, EventArgs e)
         {
@@ -190,7 +183,8 @@ namespace TPC_Resto
 
                 if (insumoSeleccionado.Stock < cantidad)
                 {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alertStock", "alert('El stock es insuficiente.');", true);
+                    string alertScript = "Swal.fire({ icon: 'error', title: 'Oops...', text: 'El stock es insuficiente.' });";
+                    ClientScript.RegisterStartupScript(this.GetType(), "stockInsuficiente", alertScript, true);
                     return;
                 }
                 else
@@ -210,14 +204,15 @@ namespace TPC_Resto
             }
             else
             {
-                // Mostrar un mensaje de error con JavaScript si la cantidad no es válida
                 if (ddlInsumos.SelectedValue == "0")
                 {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alertInsumo", "alert('Por favor, seleccione un insumo válido.');", true);
+                    string alertScript = "Swal.fire({ icon: 'error', title: 'Oops...', text: 'Por favor, seleccione un insumo válido.' });";
+                    ClientScript.RegisterStartupScript(this.GetType(), "insumoInvalido", alertScript, true);
                 }
                 else
                 {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alertCantidad", "alert('Por favor ingrese una cantidad válida mayor a 0.');", true);
+                    string alertScript = "Swal.fire({ icon: 'error', title: 'Oops...', text: 'Por favor ingrese una cantidad válida mayor a 0.' });";
+                    ClientScript.RegisterStartupScript(this.GetType(), "ingresoInvalido", alertScript, true);
                 }
             }
 

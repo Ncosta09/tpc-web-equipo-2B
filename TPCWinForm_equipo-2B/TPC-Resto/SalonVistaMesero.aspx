@@ -46,7 +46,7 @@
                    <div class="row-btn">
                        <div class="botons">
                    <asp:Button ID="BtnAgregarInsumo" runat="server" Text="agregar insumo" OnClick="BtnAgregarInsumo_Click" OnClientClick="showModalInsumo(); return true;"/> <%// habre popup con insumos, se seleccionan y se agregan al gridview (todos sus valores) %>
-                   <asp:Button ID="BtnCerrarMesa" runat="server" Text="cerrar mesa" OnClick="BtnCerrarMesa_Click" /> <%// cierra la mesa %>
+                   <%--<asp:Button ID="BtnCerrarMesa" runat="server" Text="cerrar mesa" OnClick="BtnCerrarMesa_Click" />--%> <%// cierra la mesa %>
                        </div>
                        <asp:Label ID="lblTotal" runat="server" Text=""></asp:Label> <% // total forzado para primera vista %>
                     </div>
@@ -68,18 +68,6 @@
               <asp:Button ID="Insumos" runat="server" Text="Agregar Insumo" OnClick="Insumos_Click"/>
             </div>
           </div>
-              <%-- Modal --%>
-          <div id="asignarMeseroModal" class="modal">
-            <div class="modal-content">
-              <asp:Button class="close" runat="server" Text=&times; />
-              <%--<span class="close"></span>--%>
-              <h3>Asignar Mesero</h3>
-              <asp:Label ID="lblNumeroMesa" runat="server" Text=""></asp:Label>
 
-              <asp:DropDownList cssClass="ddlistMeseros" ID="ddlMeseros" runat="server"></asp:DropDownList>
-
-              <asp:Button ID="btnAsignarMesero" runat="server" Text="Asignar Mesero" OnClick="btnAsignarMesero_Click"/>
-            </div>
-          </div>
 
 </asp:Content>

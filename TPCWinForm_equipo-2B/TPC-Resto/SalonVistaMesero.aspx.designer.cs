@@ -78,15 +78,6 @@ namespace TPC_Resto
         protected global::System.Web.UI.WebControls.Button BtnAgregarInsumo;
 
         /// <summary>
-        /// Control BtnCerrarMesa.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnCerrarMesa;
-
-        /// <summary>
         /// Control lblTotal.
         /// </summary>
         /// <remarks>
@@ -130,32 +121,5 @@ namespace TPC_Resto
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Insumos;
-
-        /// <summary>
-        /// Control lblNumeroMesa.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNumeroMesa;
-
-        /// <summary>
-        /// Control ddlMeseros.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlMeseros;
-
-        /// <summary>
-        /// Control btnAsignarMesero.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAsignarMesero;
     }
 }
