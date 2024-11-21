@@ -60,3 +60,16 @@
     color: red;
     font-size: 12px;
 }
+
+.register-link {
+    display: block; /* Hace que el enlace sea un bloque para centrarlo */
+    text-align: center; /* Centra el texto */
+    color: black; /* Cambia el color del texto a negro */
+    font-weight: normal; /* Evita que el texto esté en negrita */
+    margin-top: 20px; /* Separación con otros elementos */
+}
+
+.register-link:hover {
+    color: gray; /* Cambia el color a azul cuando se pasa el ratón */
+    text-decoration: none; /* Elimina el subrayado por defecto */
+}

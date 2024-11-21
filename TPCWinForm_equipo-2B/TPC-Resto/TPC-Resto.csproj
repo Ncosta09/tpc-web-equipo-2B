@@ -147,6 +147,7 @@
     <Content Include="Perfil.aspx" />
     <Content Include="Registro.aspx" />
     <Content Include="Reporte.aspx" />
+    <Content Include="RestablecerContra.aspx" />
     <Content Include="Salon.aspx" />
     <Content Include="SalonVistaMesero.aspx" />
     <Content Include="Script_JS\CambioCuadro.js" />
@@ -216,6 +217,13 @@
     </Compile>
     <Compile Include="Reporte.aspx.designer.cs">
       <DependentUpon>Reporte.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RestablecerContra.aspx.cs">
+      <DependentUpon>RestablecerContra.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RestablecerContra.aspx.designer.cs">
+      <DependentUpon>RestablecerContra.aspx</DependentUpon>
     </Compile>
     <Compile Include="Salon.aspx.cs">
       <DependentUpon>Salon.aspx</DependentUpon>

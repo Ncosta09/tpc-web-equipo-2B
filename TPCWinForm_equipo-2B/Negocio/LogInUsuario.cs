@@ -41,5 +41,30 @@ namespace Negocio
             }
 
         }
+
+        public bool CambiarContrasenia(string email, string nuevaContrasenia)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setConsulta("UPDATE Usuarios SET Contraseña = @NuevaContrasenia WHERE Correo = @Correo");
+
+                datos.setParametro("@Correo", email);
+                datos.setParametro("@NuevaContrasenia", nuevaContrasenia);
+
+                datos.ejecutarAccion();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

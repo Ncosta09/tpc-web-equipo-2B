@@ -22,6 +22,7 @@
 
             </div>
             <%--<p class="register-link">¿No tienes una cuenta? <a href="~/Registro">Registrate aquí</a></p>--%>
+            <a class="register-link" href="RestablecerContra.aspx">Restablecer contraseña</a>
         </div>
     </main>
 
