@@ -225,6 +225,18 @@
     cursor: pointer;
 }
 
-    .btn-eliminar:hover {
-        background-color: #d32f2f;
-    }
+.btn-eliminar:hover {
+    background-color: #d32f2f;
+}
+
+.filtrar-insumo {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.search-text{
+    margin: 0px;
+}

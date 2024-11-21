@@ -17,6 +17,24 @@
         }
     </script>
 
+<script type="text/javascript">
+    function filterDropdown() {
+        var input = document.getElementById("searchDropdown");
+        var filter = input.value.toUpperCase();
+        var dropdown = document.getElementById("<%= ddlInsumos.ClientID %>");
+        var options = dropdown.getElementsByTagName("option");
+
+        for (var i = 0; i < options.length; i++) {
+            var optionText = options[i].text.toUpperCase();
+            if (optionText.indexOf(filter) > -1) {
+                options[i].style.display = "";
+            } else {
+                options[i].style.display = "none";
+            }
+        }
+    }
+</script>
+
     <div class="section1">
 
         <div class="col-izq">
@@ -90,6 +108,10 @@
             <%--<span class="close"></span>--%>
             <h3>Agregar Insumo </h3>
             <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
+            <div class="filtrar-insumo">
+                <label class="search-text" for="searchDropdown">Filtrar insumo:</label>
+                <input type="text" id="searchDropdown" onkeyup="filterDropdown()" placeholder="Insumo...">
+            </div>
             <div class="container-insumos">
                 <asp:DropDownList CssClass="ddlInsumos" ID="ddlInsumos" runat="server"></asp:DropDownList>
                 <asp:TextBox CssClass="txtBoxInsumos" ID="txtCantidad" runat="server" TextMode="Number" oninput="this.value = this.value.replace(/[^1-9]/g, '')" Text="0"></asp:TextBox>
