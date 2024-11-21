@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web.Optimization;
 using System.Web.UI;
 using Negocio;
 
@@ -83,7 +84,9 @@ namespace TPC_Resto
                 string.IsNullOrWhiteSpace(txtPrecio.Text) ||
                 string.IsNullOrWhiteSpace(txtStock.Text))
             {
-                Response.Write("<script>alert('Por favor, completa todos los campos');</script>");
+                string alertScript = "Swal.fire({ icon: 'error', title: 'Oops...', text: 'Por favor, complete todos los campos correctamente.' });";
+                ClientScript.RegisterStartupScript(this.GetType(), "NewProductError", alertScript, true);
+                //Response.Write("<script>alert('Por favor, completa todos los campos');</script>");
                 return;
             }
 

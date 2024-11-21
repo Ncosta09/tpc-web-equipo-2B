@@ -2,7 +2,9 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
-    
+    <link href="Content/Styles/Header.css" rel="stylesheet" />
+    <link href="Content/Styles/Footer.css" rel="stylesheet" />
+
     <div class="container mt-5" style="max-width: 500px;">
         <h2 class="text-center mb-4 text-secondary">Ingrese Nuevo Producto</h2>
         
