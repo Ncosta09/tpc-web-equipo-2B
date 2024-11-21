@@ -117,7 +117,8 @@ namespace TPC_Resto
                 datos.ejecutarAccion();
 
                 string mensaje = IdInsumo.HasValue ? "Producto actualizado exitosamente" : "Producto agregado exitosamente";
-                Response.Write($"<script>alert('{mensaje}'); window.location='MenuStock.aspx';</script>");
+                string alertScript = $@"Swal.fire({{ title: '{mensaje}', icon: 'success', confirmButtonText: 'OK' }}).then((result) => {{ if (result.isConfirmed) {{ window.location.href = 'MenuStock.aspx'; }} }});";
+                ClientScript.RegisterStartupScript(this.GetType(), "productoAgregado", alertScript, true);
             }
             catch (Exception ex)
             {
